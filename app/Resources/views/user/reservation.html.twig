@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <div class="col-md-12">
+                        <img src="{{ asset('uploads/photos/' ~ reservation.place.photo) }}" style="max-height: 50%; max-width: 50%">
+                    </div>
+                    <div class="col-md-6">
+                        <header>
+                            <h2>{{ reservation.place.name }}</h2>
+                        </header>
+                        <h5>Contact <a href="{{ path('send_message', {ownerId: reservation.place.ownerId, placeId:  reservation.place.id}) }}">{{ reservation.place.owner.username }}</a> </h5>
+                        <h5>{{ reservation.startDate }} - {{ reservation.endDate }}</h5>
+                        <hr>
+                        <button class="collapsible">Description</button>
+                        <div class="content">
+                            <p>{{ reservation.place.description }}</p>
+                        </div>
+                        <hr>
+                        <small class="author">
+                            {{ reservation.place.country }}
+                        </small>
+                        <footer>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-xs" href="{{ path('homepage') }}">Back</a>
+                            </div>
+                        </footer>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
+
+

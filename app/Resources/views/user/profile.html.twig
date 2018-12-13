@@ -1,0 +1,19 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
+</head>
+<body>
+
+<div class="dropdown">
+    <button onclick="myFunction()" class="dropbtn">Profile</button>
+    <div id="myDropdown" class="dropdown-content">
+        <a href="#">My Profile</a>
+        <a href="{{ path('security_logout') }}">Logout</a>
+    </div>
+</div>
+
+<script src="{{ asset('js/dropdown_menu.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('send_message', {ownerId: ownerId, placeId: placeId}) }}" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Send Message</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="message_content">Content</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.content, { 'attr':{'id': 'content_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('homepage') }}">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                    {{ form_row(form._token) }}
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('place_add') }}" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Add Place</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="place_name">Name</label>
+                        <div class="col-sm-4 " >
+                            {{ form_widget(form.name, { 'attr':{'id': 'name_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_description">Description</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.description, { 'attr':{'id': 'description_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    {#<div class="form-group">#}
+                        {#<label class="col-sm-4 control-label">Guests</label>#}
+                        {#<div class="col-sm-4 ">#}
+                            {#<select id="guests">#}
+                                {#<option name="guests" value="1" selected="selected">1</option>#}
+                                {#<option name="guests" value="2">2</option>#}
+                                {#<option name="guests" value="3">3</option>#}
+                                {#<option name="guests" value="4">4</option>#}
+                                {#<option name="guests" value="5">5</option>#}
+                                {#<option name="guests" value="6">6</option>#}
+                                {#<option name="guests" value="7">7</option>#}
+                                {#<option name="guests" value="8">8</option>#}
+                                {#<option name="guests" value="9">9</option>#}
+                                {#<option name="guests" value="10">10</option>#}
+                            {#</select>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_price">Price per night</label>
+                        <div class="col-sm-4 ">
+                            {{ form_widget(form.price, { 'attr':{'id': 'price_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="font-size: large">Address</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_country">Country</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.country, { 'attr':{'id': 'country_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    {#<div class="form-group">#}
+                        {#<label class="col-sm-4 control-label" for="article_content">City</label>#}
+                        {#<div class="col-sm-6">#}
+                            {#<select id="city">#}
+                                {#<option name="city" value="" selected="selected"></option>#}
+                            {#</select>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_street">Street</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.street, { 'attr':{'id': 'street_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_photo">Select image:</label>
+
+                        <div class="col-sm-4 ">
+                            {{ form_widget(form.photo, { 'attr':{'id': 'photo_form', 'class': 'fileToUpload'} }) }}
+                            {#<input type="file" name="form[photo]" id="fileToUpload">#}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('homepage') }}">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

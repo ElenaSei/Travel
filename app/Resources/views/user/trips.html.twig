@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content">
+        <div class="row">
+            {% for trip in trips %}
+                <div class="col-md-6">
+                    <article>
+                        <a href="{{ path('user_reservation', {'id': trip.place.id}) }}">
+                            <img src="{{ asset('uploads/photos/' ~ trip.place.photo) }}" style="max-height: 50%; max-width: 50%">
+                        </a>
+
+                        <small class="author" style="padding-top: 10px">
+                            {{ trip.place.country }}
+                        </small>
+
+                        <a href="{{ path('user_reservation', {'id': trip.place.id}) }}">
+
+                            <header>
+                                <h2>{{ trip.place.name }}</h2>
+                            </header>
+
+
+                        </a>
+
+
+                        <p>
+                            {{ trip.place.summary }}
+                        </p>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+

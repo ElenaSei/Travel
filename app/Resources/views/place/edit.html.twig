@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('place_edit', {id: place.id}) }}" method="POST" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Edit Place</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Place Name</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" placeholder="Place Name"
+                                   name="place[name]" value="{{ place.name }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Description</label>
+                        <div class="col-sm-6">
+                        <textarea class="form-control" rows="6"
+                                  name="place[description]">{{ place.description }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_title">Price per night</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="article_title" placeholder="Price per night"
+                                   name="place[price]"  value="{{ place.price }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" style="font-size: large">Address</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_country">Country</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.country, { 'attr':{'id': 'country_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    {#<div class="form-group">#}
+                    {#<label class="col-sm-4 control-label" for="article_content">City</label>#}
+                    {#<div class="col-sm-6">#}
+                    {#<select id="city">#}
+                    {#<option name="city" value="" selected="selected"></option>#}
+                    {#</select>#}
+                    {#</div>#}
+                    {#</div>#}
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_street">Street</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="2"
+                                      name="place[street]">{{ place.street }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="article_content">Change image:</label>
+                        <div class="col-sm-4 ">
+                            <input type="file" name="place[photo]" id="fileToUpload">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('place_view', {id: place.id}) }}">Cancel</a>
+                            <button type="submit" class="btn btn-success">Edit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
