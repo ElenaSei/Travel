@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {% for msg in app.session.flashbag.get('info') %}
+        <div class="alert-danger">
+            <a href="#" class="close" data-dismiss="alert"></a>
+            {{ msg }}
+        </div>
+    {% endfor %}
     <div class="container body-content span=8 offset=2">
         <div class="well">
             <form class="form-horizontal" action="{{ path('send_message', {ownerId: ownerId, placeId: placeId}) }}" method="post" enctype="multipart/form-data">

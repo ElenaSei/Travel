@@ -10,9 +10,21 @@ use TravelBundle\Entity\Message;
 use TravelBundle\Entity\Session;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\MessageType;
+use TravelBundle\Service\MessageServiceInterface;
 
 class MessageController extends Controller
 {
+    private $messageService;
+
+    /**
+     * MessageController constructor.
+     * @param MessageServiceInterface $messageService
+     */
+    public function __construct(MessageServiceInterface $messageService)
+    {
+        $this->messageService = $messageService;
+    }
+
     /**
      * @Route("/user/{ownerId}/message/{placeId}", name="send_message")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
@@ -38,6 +50,7 @@ class MessageController extends Controller
             $session = $this->getDoctrine()->getRepository(Session::class)->findOneByUsersId($sender, $recipient);
 
             if (empty($session)){
+
                 $session = new Session();
                 $session->addUsers($recipient)->addUsers($sender);
 
@@ -59,9 +72,11 @@ class MessageController extends Controller
 
             $message->setSession($session);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($message);
-            $em->flush();
+            if (!$this->messageService->save($message)){
+                $this->addFlash('info', 'Message could not send!');
+
+                return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+            }
 
             $this->addFlash('info', 'Message send successfully!');
             return $this->redirectToRoute('place_view', ['id' => $placeId]);
@@ -81,14 +96,7 @@ class MessageController extends Controller
 
         $sessions = $this->getDoctrine()->getRepository(Session::class)->findByUser($user);
 
-        $messages = [];
-
-        /**
-         * @var Session $session
-         */
-        foreach ($sessions as $session){
-            $messages[] = $this->getDoctrine()->getRepository(Message::class)->findOneBy(['session' => $session], ['dateAdded' => 'DESC']);
-        }
+        $messages = $this->messageService->findOnePerSession($sessions, ['dateAdded' => 'DESC']);
 
         return $this->render('user/all_messages.html.twig', ['messages' => $messages]);
     }
@@ -100,12 +108,12 @@ class MessageController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function messageAction($id, Request $request){
+
         $session = $this->getDoctrine()->getRepository(Session::class)->find($id);
-        $messages = $this->getDoctrine()->getRepository(Message::class)->findBy(['session' => $session], ['dateAdded' => 'DESC']);
+
+        $messages =$this->messageService->findAllFromSession(['session' => $session], ['dateAdded' => 'ASC']);
 
         $session->setIsRead(true);
-
-
 
         $em = $this->getDoctrine()->getManager();
         $em->merge($session);

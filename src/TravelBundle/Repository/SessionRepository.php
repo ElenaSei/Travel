@@ -27,6 +27,6 @@ class SessionRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere(':sender MEMBER OF session.users')
             ->setParameters([':recipient' => $recipient, ':sender' => $sender])
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
     }
 }

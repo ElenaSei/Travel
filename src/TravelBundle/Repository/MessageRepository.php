@@ -1,6 +1,9 @@
 <?php
 
 namespace TravelBundle\Repository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use TravelBundle\Entity\Message;
 
 /**
  * MessageRepository
@@ -11,4 +14,26 @@ namespace TravelBundle\Repository;
 class MessageRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    /**
+     * MessageRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Message::class));
+    }
+
+    public function save(Message $message){
+
+        try{
+            $this->_em->persist($message);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+
+    }
 }
