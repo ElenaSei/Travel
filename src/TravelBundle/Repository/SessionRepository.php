@@ -1,6 +1,9 @@
 <?php
 
 namespace TravelBundle\Repository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use TravelBundle\Entity\Session;
 
 
 /**
@@ -11,7 +14,16 @@ namespace TravelBundle\Repository;
  */
 class SessionRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByUser($user){
+    /**
+     * MessageRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Session::class));
+    }
+
+    public function findAllByUser($user){
         return $this->createQueryBuilder('session')
             ->where(':user MEMBER OF session.users')
             ->setParameter(':user', $user)
@@ -28,5 +40,31 @@ class SessionRepository extends \Doctrine\ORM\EntityRepository
             ->setParameters([':recipient' => $recipient, ':sender' => $sender])
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function save(Session $message){
+
+        try{
+            $this->_em->persist($message);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+
+    }
+
+    public function update(Session $session){
+        try{
+            $this->_em->merge($session);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
     }
 }

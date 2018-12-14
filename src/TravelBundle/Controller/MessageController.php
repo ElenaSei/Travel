@@ -11,18 +11,22 @@ use TravelBundle\Entity\Session;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\MessageType;
 use TravelBundle\Service\MessageServiceInterface;
+use TravelBundle\Service\SessionServiceInterface;
 
 class MessageController extends Controller
 {
     private $messageService;
+    private $sessionService;
 
     /**
      * MessageController constructor.
      * @param MessageServiceInterface $messageService
+     * @param SessionServiceInterface $sessionService
      */
-    public function __construct(MessageServiceInterface $messageService)
+    public function __construct(MessageServiceInterface $messageService, SessionServiceInterface $sessionService)
     {
         $this->messageService = $messageService;
+        $this->sessionService = $sessionService;
     }
 
     /**
@@ -47,7 +51,7 @@ class MessageController extends Controller
             $message->setRecipient($recipient);
             $message->setSender($sender);
 
-            $session = $this->getDoctrine()->getRepository(Session::class)->findOneByUsersId($sender, $recipient);
+            $session = $this->sessionService->findOneByUsersId($recipient, $sender);
 
             if (empty($session)){
 
@@ -56,9 +60,11 @@ class MessageController extends Controller
 
                 $session->setIsRead(false);
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($session);
-                $em->flush();
+                if(!$this->sessionService->save($session)){
+                    $this->addFlash('info', 'Session could not be saved!');
+
+                    return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+                }
 
                 $sender->addSessions($session);
                 $recipient->addSessions($session);
@@ -66,9 +72,11 @@ class MessageController extends Controller
 
             $session->setIsRead(false);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($session);
-            $em->flush();
+            if (!$this->sessionService->update($session)){
+                $this->addFlash('info', 'Session could not be update!');
+
+                return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+            }
 
             $message->setSession($session);
 
@@ -94,7 +102,7 @@ class MessageController extends Controller
 
         $user = $this->getDoctrine()->getRepository(User::class)->find($currentUserId);
 
-        $sessions = $this->getDoctrine()->getRepository(Session::class)->findByUser($user);
+        $sessions = $this->sessionService->findAllByUser($user);
 
         $messages = $this->messageService->findOnePerSession($sessions, ['dateAdded' => 'DESC']);
 
@@ -109,15 +117,26 @@ class MessageController extends Controller
      */
     public function messageAction($id, Request $request){
 
-        $session = $this->getDoctrine()->getRepository(Session::class)->find($id);
+        /**
+         * @var Session $session
+         */
+        $session = $this->sessionService->findOneById($id);
 
-        $messages =$this->messageService->findAllFromSession(['session' => $session], ['dateAdded' => 'ASC']);
+        if (empty($session)){
+            $this->addFlash('info', 'Session does not exist!');
+
+            return $this->redirectToRoute('user_mailbox');
+        }
+
+        $messages = $this->messageService->findAllFromSession(['session' => $session], ['dateAdded' => 'ASC']);
 
         $session->setIsRead(true);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->merge($session);
-        $em->flush();
+        if (!$this->sessionService->update($session)){
+            $this->addFlash('info', 'Session could not be update!');
+
+            return $this->redirectToRoute('user_mailbox');
+        }
 
         return $this->render('user/view_message.html.twig', ['messages' => $messages]);
 

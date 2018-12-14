@@ -101,8 +101,6 @@ class Session
     }
 
 
-
-
     /**
      * Get id.
      *

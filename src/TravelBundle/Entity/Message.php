@@ -51,7 +51,7 @@ class Message
 
 
     /**
-     * @var integer
+     * @var Session
      *
      * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\Session", inversedBy="messages")
      */
@@ -66,7 +66,7 @@ class Message
     }
 
     /**
-     * @return int
+     * @return Session
      */
     public function getSession()
     {
@@ -74,11 +74,14 @@ class Message
     }
 
     /**
-     * @param int $session
+     * @param Session $session
+     * @return Message
      */
-    public function setSession($session)
+    public function setSession(Session $session)
     {
         $this->session = $session;
+
+        return $this;
     }
 
 
