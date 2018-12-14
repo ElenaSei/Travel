@@ -12,21 +12,25 @@ use TravelBundle\Entity\User;
 use TravelBundle\Form\MessageType;
 use TravelBundle\Service\MessageServiceInterface;
 use TravelBundle\Service\SessionServiceInterface;
+use TravelBundle\Service\UserServiceInterface;
 
 class MessageController extends Controller
 {
     private $messageService;
     private $sessionService;
+    private $userService;
 
     /**
      * MessageController constructor.
      * @param MessageServiceInterface $messageService
      * @param SessionServiceInterface $sessionService
+     * @param UserServiceInterface $userService
      */
-    public function __construct(MessageServiceInterface $messageService, SessionServiceInterface $sessionService)
+    public function __construct(MessageServiceInterface $messageService, SessionServiceInterface $sessionService, UserServiceInterface $userService)
     {
         $this->messageService = $messageService;
         $this->sessionService = $sessionService;
+        $this->userService = $userService;
     }
 
     /**
@@ -43,10 +47,16 @@ class MessageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
-            $senderId = $this->getUser();
-            $sender = $this->getDoctrine()->getRepository(User::class)->find($senderId);
+            $currentUser = $this->getUser();
+            /**
+             * @var User $sender;
+             */
+            $sender = $this->userService->findOne($currentUser);
 
-            $recipient = $this->getDoctrine()->getRepository(User::class)->find($ownerId);
+            /**
+             * @var User $recipient;
+             */
+            $recipient = $this->userService->findOne($ownerId);
 
             $message->setRecipient($recipient);
             $message->setSender($sender);
@@ -98,9 +108,9 @@ class MessageController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function allAction(){
-        $currentUserId = $this->getUser()->getId();
+        $currentUser = $this->getUser();
 
-        $user = $this->getDoctrine()->getRepository(User::class)->find($currentUserId);
+        $user = $this->userService->findOne($currentUser);
 
         $sessions = $this->sessionService->findAllByUser($user);
 
