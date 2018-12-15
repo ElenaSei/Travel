@@ -63,14 +63,9 @@
                                     My trips
                                 </a>
                             </li>
-                            {#<li>#}
-                            {#<a href="{{ path('user_messages') }}">#}
-                            {#Messages#}
-                            {#</a>#}
-                            {#</li>#}
 
                             <li>
-                                {% include 'user/messages.html.twig' %}
+                                <a href="{{ path('user_mailbox') }}">Messages</a>
                             </li>
 
                             <li>

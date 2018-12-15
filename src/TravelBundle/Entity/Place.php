@@ -97,9 +97,23 @@ class Place
     /**
      * @var string
      *
+     * @ORM\Column(name="city", type="string", nullable=false)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="street", type="string", length=255)
      */
     private $street;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="capacity", type="integer", nullable=false)
+     */
+    private $capacity;
 
     /**
      * Place constructor.
@@ -107,6 +121,39 @@ class Place
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
+        $this->capacity = 1;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity(string $city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCapacity(): int
+    {
+        return $this->capacity;
+    }
+
+    /**
+     * @param int $capacity
+     */
+    public function setCapacity(int $capacity): void
+    {
+        $this->capacity = $capacity;
     }
 
     /**

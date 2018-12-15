@@ -73,7 +73,7 @@ class MessageController extends Controller
                 if(!$this->sessionService->save($session)){
                     $this->addFlash('info', 'Session could not be saved!');
 
-                    return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+                    return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
                 }
 
                 $sender->addSessions($session);
@@ -85,7 +85,7 @@ class MessageController extends Controller
             if (!$this->sessionService->update($session)){
                 $this->addFlash('info', 'Session could not be update!');
 
-                return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+                return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
             }
 
             $message->setSession($session);
@@ -93,14 +93,14 @@ class MessageController extends Controller
             if (!$this->messageService->save($message)){
                 $this->addFlash('info', 'Message could not send!');
 
-                return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+                return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
             }
 
             $this->addFlash('info', 'Message send successfully!');
             return $this->redirectToRoute('place_view', ['id' => $placeId]);
         }
 
-        return $this->render('user/send_message.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+        return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
     }
 
     /**
@@ -116,7 +116,7 @@ class MessageController extends Controller
 
         $messages = $this->messageService->findOnePerSession($sessions, ['dateAdded' => 'DESC']);
 
-        return $this->render('user/all_messages.html.twig', ['messages' => $messages]);
+        return $this->render('message/all.html.twig', ['messages' => $messages]);
     }
 
     /**
@@ -148,7 +148,7 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
-        return $this->render('user/view_message.html.twig', ['messages' => $messages]);
+        return $this->render('message/view.html.twig', ['messages' => $messages]);
 
     }
 }

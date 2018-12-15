@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for msg in app.session.flashbag.get('info') %}
+        <div class="alert-info">
+            <a href="#" class="close" data-dismiss="alert"></a>
+            {{ msg }}
+        </div>
+    {% endfor %}
     <div class="content">
         <div class="row">
             {% for place in places %}
