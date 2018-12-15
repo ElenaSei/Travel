@@ -151,7 +151,7 @@ class Place
     /**
      * @param int $capacity
      */
-    public function setCapacity(int $capacity): void
+    public function setCapacity($capacity): void
     {
         $this->capacity = $capacity;
     }

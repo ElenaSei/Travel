@@ -105,6 +105,7 @@ class MessageController extends Controller
 
     /**
      * @Route("/user/mailbox", name="user_mailbox")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function allAction(){
@@ -121,6 +122,7 @@ class MessageController extends Controller
 
     /**
      * @Route("user/mailbox/{id}", name="user_view_message")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response

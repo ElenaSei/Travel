@@ -25,14 +25,14 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="string", length=255)
+     * @ORM\Column(name="startDate", type="date", length=255)
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endDate", type="string", length=255)
+     * @ORM\Column(name="endDate", type="date", length=255)
      */
     private $endDate;
 

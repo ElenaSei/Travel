@@ -2,6 +2,7 @@
 
 namespace TravelBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,6 +66,7 @@ class UserController extends Controller
 
     /**
      * @Route("/userTrips", name="user_trips")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function userTrips(){
         $currentUser = $this->getUser();
@@ -82,6 +84,7 @@ class UserController extends Controller
 
     /**
      * @Route("/userPlaces", name="user_places")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function userPlaces(){
@@ -93,6 +96,7 @@ class UserController extends Controller
 
     /**
      * @Route("/reservation/{id}", name="user_reservation")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */

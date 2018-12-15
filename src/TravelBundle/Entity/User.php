@@ -95,6 +95,13 @@ class User implements UserInterface
      */
     private $sessions;
 
+    /**
+     * @var Search
+     *
+     * @ORM\OneToOne(targetEntity="TravelBundle\Entity\Search", mappedBy="user")
+     */
+    private $search;
+
 
     /**
      * User constructor.
@@ -108,6 +115,26 @@ class User implements UserInterface
         $this->receivedMessages = new ArrayCollection();
         $this->sessions = new ArrayCollection();
     }
+
+    /**
+     * @return Search
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * @param Search $search
+     * @return User
+     */
+    public function setSearch(Search $search)
+    {
+        $this->search = $search;
+
+        return $this;
+    }
+
 
     /**
      * @return ArrayCollection

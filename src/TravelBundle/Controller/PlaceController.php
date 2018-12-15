@@ -2,6 +2,7 @@
 
 namespace TravelBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Intl\Intl;
@@ -9,14 +10,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Reservation;
 use TravelBundle\Entity\Role;
+use TravelBundle\Entity\Search;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\PlaceType;
 use TravelBundle\Form\ReservationType;
+use TravelBundle\Form\SearchType;
 
 class PlaceController extends Controller
 {
     /**
      * @Route("/addPlace", name="place_add")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -122,6 +126,7 @@ class PlaceController extends Controller
 
     /**
      * @Route("/edit/{id}", name="place_edit")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param Request $request
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
@@ -168,6 +173,7 @@ class PlaceController extends Controller
 
     /**
      * @Route("/delete/{id}", name="place_delete")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
@@ -179,6 +185,50 @@ class PlaceController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/search", name="search")
+     * @param Request $request
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchAction(Request $request){
+        $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
+        $search = $this->getDoctrine()->getRepository(Search::class)->findOneBy(['user' => $currentUser]);
+
+        if (empty($search)){
+            $search = new Search();
+        }
+
+        $form = $this->createForm(SearchType::class, $search);
+        $form->handleRequest($request);
+
+
+
+        if ($form->isSubmitted()) {
+
+            if ($search !== $currentUser->getSearch()){
+                $currentUser->setSearch($search);
+                $search->setUser($currentUser);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($search);
+                $em->flush();
+            }else{
+
+                $em = $this->getDoctrine()->getManager();
+                $em->merge($search);
+                $em->flush();
+            }
+
+            $places = $this->getDoctrine()->getRepository(Place::class)->findAllBy($search);
+
+
+            return $this->render('home/index.html.twig', ['places' => $places]);
+
+        }
+
+        return $this->render('home/search.html.twig', ['form' => $form->createView()]);
     }
 
     public function generateImg($file)
