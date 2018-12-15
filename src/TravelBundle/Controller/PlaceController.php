@@ -2,6 +2,7 @@
 
 namespace TravelBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,8 +97,6 @@ class PlaceController extends Controller
         $form = $this->createForm(ReservationType::class, $reservation);
         $form->handleRequest($request);
 
-
-
         if (isset($request) && $request->isMethod('post')){
 
             $daterange = explode(' - ', $request->get('daterange'));
@@ -120,6 +119,7 @@ class PlaceController extends Controller
         if ($place === null){
             throw new \Exception('Undefined place');
         }
+
 
         return $this->render('place/view.html.twig', ['place' => $place, 'form' => $form->createView()]);
     }
@@ -221,15 +221,66 @@ class PlaceController extends Controller
                 $em->flush();
             }
 
-            $places = $this->getDoctrine()->getRepository(Place::class)->findAllBy($search);
-
-
-            return $this->render('home/index.html.twig', ['places' => $places]);
-
+            return $this->redirectToRoute('place_selected', ['searchId' => $search->getId()]);
         }
 
         return $this->render('home/search.html.twig', ['form' => $form->createView()]);
     }
+
+    /**
+     * @Route("/place/all_selected/{searchId}", name="place_selected")
+     * @param int $searchId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function allSelectedAction($searchId){
+        $search = $this->getDoctrine()->getRepository(Search::class)->find($searchId);
+
+        $places = $this->getDoctrine()->getRepository(Place::class)->findAllBy($search);
+
+       return $this->render('place/all_selected.html.twig', ['places' => $places, 'search' => $search]);
+    }
+
+
+    /**
+     * @Route("/place/{id}/book/{searchId}", name="place_book")
+     * @param $id
+     * @param $searchId
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function bookAction($id, $searchId, Request $request){
+        $place = $this->getDoctrine()->getRepository(Place::class)->find($id);
+        $search = $this->getDoctrine()->getRepository(Search::class)->find($searchId);
+
+        $reservation = new Reservation();
+
+        $form = $this->createForm(ReservationType::class, $reservation);
+        $form->handleRequest($request);
+
+        if (isset($request) && $request->isMethod('post')){
+            $currentUser = $this->getUser();
+
+            $startDate = $search->getStartDate();
+            $endDate = $search->getEndDate();
+
+
+            $reservation->setRenter($currentUser);
+            $reservation->setPlace($place);
+            $reservation->setStartDate($startDate);
+            $reservation->setEndDate($endDate);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($reservation);
+            $em->flush();
+
+            $this->addFlash('info', 'Have a nice a trip!');
+            return $this->redirectToRoute('homepage');
+
+        }
+
+        return $this->render('place/book.html.twig', ['place' => $place, 'search' => $search]);
+    }
+
 
     public function generateImg($file)
     {

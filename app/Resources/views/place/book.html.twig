@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+{% endblock %}
+
+{% block main %}
+    {% for msg in app.session.flashbag.get('info') %}
+        <div class="alert-success">
+            <a href="#" class="close" data-dismiss="alert"></a>
+            {{ msg }}
+        </div>
+    {% endfor %}
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <div>
+                        <img src="{{ asset('uploads/photos/' ~ place.photo) }}" style="max-height: 50%; max-width: 50%">
+                    </div>
+                    <div>
+                        <div>
+                            <header>
+                                <h2 style="text-align: left">{{ place.name }}</h2>
+                                <p style="text-align: left">Price per night: <strong>{{ place.price }}$</strong></p>
+                                <small class="author">
+                                    {{ place.country }}
+                                </small>
+                            </header>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <hr>
+                        <div class="content">
+                            <p>{{ place.description }}</p>
+                        </div>
+                        <hr>
+                        <p>Contact <a
+                                    href="{{ path('send_message', {ownerId: place.ownerId, placeId: place.id}) }}">{{ place.owner.username }}</a>
+                        </p>
+                        <footer>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-xs" href="{{ path('homepage') }}">Back</a>
+                            </div>
+                        </footer>
+                    </div>
+
+
+                    <div class="col-lg-offset-6 table-bordered">
+                        <fieldset>
+                            <form method="post">
+                                <h2 class="text-center">Book</h2>
+                                <div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="form_startDate">Start Date</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Place Name"
+                                                   name="startDate" value="{{ search.startDate|date('d M Y') }}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="form_endDate">End Date</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Place Name"
+                                                   name="endDate" value="{{ search.endDate|date('d M Y') }}"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                    {% set difference = date(search.endDate).diff(date(search.startDate)) %}
+                                    {% set leftDays = difference.days %}
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Price per night:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Place Name"
+                                                   name="pricePerNights"
+                                                   value="{{ place.price }}$ x {{ leftDays }} days" readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Price per night:</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Place Name"
+                                                   name="totalPrice" value="{{ place.price * leftDays }}$"
+                                                   readonly="readonly">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-4">
+                                            <button type="submit" class="btn btn-success">Book</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </fieldset>
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+

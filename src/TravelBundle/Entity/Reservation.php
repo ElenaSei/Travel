@@ -91,8 +91,6 @@ class Reservation
         return $this;
     }
 
-
-
     /**
      * Get id.
      *

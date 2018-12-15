@@ -23,21 +23,23 @@
                         <img src="{{ asset('uploads/photos/' ~ place.photo)}}" style="max-height: 50%; max-width: 50%">
                     </div>
                     <div>
+                        <div>
                         <header>
-                            <h2>{{ place.name }}</h2>
+                            <h2 style="text-align: left">{{ place.name }}</h2>
+                            <p style="text-align: left">Price per night: <strong>{{ place.price}}$</strong></p>
+                            <small class="author">
+                                {{ place.country }}
+                            </small>
                         </header>
-                        <h5>Contact <a href="{{ path('send_message', {ownerId: place.ownerId, placeId: place.id}) }}">{{ place.owner.username }}</a> </h5>
+                        </div>
                         <hr>
                     </div>
                     <div class="col-md-6">
-                        <button class="collapsible">Description</button>
                         <div class="content">
                             <p>{{ place.description }}</p>
                         </div>
                         <hr>
-                        <small class="author">
-                            {{ place.country }}
-                        </small>
+                        <p>Contact <a href="{{ path('send_message', {ownerId: place.ownerId, placeId: place.id}) }}">{{ place.owner.username }}</a> </p>
                         <footer>
                             <div class="pull-right">
                                 {% if app.user and (app.User == place.owner or app.getUser().isAdmin()) %}
@@ -48,18 +50,19 @@
                             </div>
                         </footer>
                     </div>
-                    {% if (app.getUser().getId() is not same as (place.ownerId)) %}
-                    <div class="col-lg-offset-6 table-bordered">
-                            <h2 class="text-center">Book</h2>
-                        <div>
-                            <p>Price per night: {{ place.price }}$</p>
-                            <form  action="{{ path('place_view', {id: place.id})  }}" method="post">
-                                Pick up dates: <input type="text" name="daterange"/>
-                                <input type="submit" value="Submit">
-                            </form>
-                        </div>
-                    </div>
-                    {% endif %}
+
+                    {#{% if (app.getUser().getId() is not same as (place.ownerId)) %}#}
+                    {#<div class="col-lg-offset-6 table-bordered">#}
+                            {#<h2 class="text-center">Book</h2>#}
+                        {#<div>#}
+                            {#<p>Price per night: {{ place.price }}$</p>#}
+                            {#<form  action="{{ path('place_view', {id: place.id})  }}" method="post">#}
+                                {#Pick up dates: <input type="text" name="daterange"/>#}
+                                {#<input type="submit" value="Submit">#}
+                            {#</form>#}
+                        {#</div>#}
+                    {#</div>#}
+                    {#{% endif %}#}
                 </article>
             </div>
         </div>
@@ -67,33 +70,33 @@
 
 
 
-    <script>
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-                opens: 'left'
-            }, function(start, end, label) {
-                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-            });
-        });
+    {#<script>#}
+        {#$(function() {#}
+            {#$('input[name="daterange"]').daterangepicker({#}
+                {#opens: 'left'#}
+            {#}, function(start, end, label) {#}
+                {#console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));#}
+            {#});#}
+        {#});#}
 
-    </script>
+    {#</script>#}
 
-    <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+    {#<script>#}
+        {#var coll = document.getElementsByClassName("collapsible");#}
+        {#var i;#}
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function() {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        }
-    </script>
+        {#for (i = 0; i < coll.length; i++) {#}
+            {#coll[i].addEventListener("click", function() {#}
+                {#this.classList.toggle("active");#}
+                {#var content = this.nextElementSibling;#}
+                {#if (content.style.display === "block") {#}
+                    {#content.style.display = "none";#}
+                {#} else {#}
+                    {#content.style.display = "block";#}
+                {#}#}
+            {#});#}
+        {#}#}
+    {#</script>#}
 
 {% endblock %}
 

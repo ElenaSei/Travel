@@ -13,7 +13,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <article>
                         <div>
-                        <a href="{{ path('place_view', {id: place.id}) }}">
+                        <a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">
                             <img src="{{ asset('uploads/photos/' ~ place.photo ) }}" style="max-height: 100%; max-width: 100%;">
                         </a>
                         </div>
@@ -24,7 +24,7 @@
                         <p>
                             {{ place.price }}$
                         </p>
-                        <a href="{{ path('place_view', {'id': place.id}) }}">
+                        <a href="{{ path('place_book', {id: place.id, searchId: search.id})  }}">
                             <h3>{{ place.name }}</h3>
                         </a>
                         <p>
