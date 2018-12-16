@@ -28,7 +28,7 @@
                                 <h2 style="text-align: left">{{ place.name }}</h2>
                                 <p style="text-align: left">Price per night: <strong>{{ place.price }}$</strong></p>
                                 <small class="author">
-                                    {{ place.country }}
+                                    {{ place.address.countryName }}
                                 </small>
                             </header>
                         </div>
@@ -88,9 +88,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-4 control-label">Price per night:</label>
+                                        <label class="col-sm-4 control-label">Total:</label>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control" placeholder="Place Name"
+                                            <input type="text" class="form-control" placeholder="Total"
                                                    name="totalPrice" value="{{ place.price * leftDays }}$"
                                                    readonly="readonly">
                                         </div>

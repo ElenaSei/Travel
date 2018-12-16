@@ -1,6 +1,7 @@
 <?php
 
 namespace TravelBundle\Repository;
+use Doctrine\ORM\Query\Expr\Join;
 use TravelBundle\Entity\Search;
 
 /**
@@ -13,18 +14,20 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
 {
     public function findAllBy(Search $search){
         return $this->createQueryBuilder('place')
-            ->where('place.country = :country')
-            ->andWhere('place.city = :city')
+            ->innerJoin('place.address', 'address')
+            ->where('address.country = :country')
+            ->andWhere('address.city = :city')
             ->andWhere('place.capacity >= :capacity')
-            ->innerJoin('place.reservations', 'reservations')
-            ->andWhere('(reservations.startDate >= :endDate AND reservations.startDate >= :startDate)
-            OR (reservations.startDate <= :endDate AND reservations.startDate <= :startDate)')
+            ->leftJoin('place.reservations', 'reservations')
+            ->andWhere('reservations IS NULL OR ((reservations.startDate >= :endDate AND reservations.startDate >= :startDate) OR
+                        (reservations.startDate <= :endDate AND reservations.startDate <= :startDate))')
             ->setParameters([
                 ':country' => $search->getCountry(),
                 ':city' => $search->getCity(),
                 ':capacity' => $search->getCapacity(),
                 ':endDate' => $search->getEndDate(),
-                ':startDate' => $search->getStartDate()])
+                ':startDate' => $search->getStartDate()
+            ])
             ->getQuery()
             ->getResult();
     }

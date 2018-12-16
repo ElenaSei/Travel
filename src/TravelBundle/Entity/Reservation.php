@@ -25,14 +25,14 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="startDate", type="date", length=255)
+     * @ORM\Column(name="startDate", type="date", length=255, nullable=false)
      */
     private $startDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="endDate", type="date", length=255)
+     * @ORM\Column(name="endDate", type="date", length=255, nullable=false)
      */
     private $endDate;
 
@@ -50,6 +50,28 @@ class Reservation
      */
     private $place;
 
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="total_money", type="decimal", nullable=false)
+     */
+    private $totalMoney;
+
+    /**
+     * @return float
+     */
+    public function getTotalMoney()
+    {
+        return $this->totalMoney;
+    }
+
+    /**
+     * @param float $totalMoney
+     */
+    public function setTotalMoney(float $totalMoney)
+    {
+        $this->totalMoney = $totalMoney;
+    }
 
     /**
      * @return User

@@ -88,32 +88,18 @@ class Place
     private $price;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="city", type="string", nullable=false)
-     */
-    private $city;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="street", type="string", length=255)
-     */
-    private $street;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="capacity", type="integer", nullable=false)
      */
     private $capacity;
+
+    /**
+     * @var Address
+     *
+     * @ORM\OneToOne(targetEntity="TravelBundle\Entity\Address", inversedBy="place")
+     */
+    private $address;
 
     /**
      * Place constructor.
@@ -125,20 +111,21 @@ class Place
     }
 
     /**
-     * @return string
+     * @return Address
      */
-    public function getCity()
+    public function getAddress()
     {
-        return $this->city;
+        return $this->address;
     }
 
     /**
-     * @param string $city
+     * @param Address $address
      */
-    public function setCity(string $city): void
+    public function setAddress(Address $address)
     {
-        $this->city = $city;
+        $this->address = $address;
     }
+
 
     /**
      * @return int
@@ -155,40 +142,6 @@ class Place
     {
         $this->capacity = $capacity;
     }
-
-    /**
-     * @return string
-     */
-    public function getStreet()
-    {
-        return $this->street;
-    }
-
-    /**
-     * @param string $street
-     */
-    public function setStreet($street)
-    {
-        $this->street = $street;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param string $country
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-    }
-
-
 
     /**
      * @return int

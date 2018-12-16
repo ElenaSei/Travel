@@ -11,30 +11,39 @@
         <ul class="list-unstyled">
             <li class="panel-body">
                 <div class="row">
-                {% for message in messages %}
+                    {% for message in messages %}
 
-                    <div class="col-lg-12">
-                <div class="col-sm-9 col-md-3 thread-author">
-                    <div class="row row-table">
-                        <div class="col-sm-7 thread-name text-truncate">
-                            <div>
-                                {{ message.sender.username }}
+                        <div class="col-lg-12">
+                            <div class="col-sm-9 col-md-3 thread-author">
+                                <div class="row row-table">
+                                    <div class="col-sm-7 thread-name text-truncate">
+                                        <div>
+                                            {% if app.user == message.sender %}
+
+                                                {{ message.recipient.username }}
+
+                                            {% else %}
+
+                                                {{ message.sender.username }}
+
+                                            {% endif %}
+                                        </div>
+                                        <time class="thread-date">
+                                            {{ message.dateAdded|date('Y-m-d') }}
+                                        </time>
+                                    </div>
+                                </div>
                             </div>
-                            <time class="thread-date">
-                                {{ message.dateAdded|date('Y-m-d')}}
-                            </time>
-                        </div>
-                    </div>
-                </div>
-                    <div class="col-sm-7 col-md-5 col-lg-6 thread-body">
-                        <a href="{{ path('user_view_message', {'id': message.session.id}) }}" ><p>{{ message.content }}</p></a>
-                    </div>
-                        {% if message.session.isRead == false %}
-                            <span style="float: right; color: red">Unread</span>
+                            <div class="col-sm-7 col-md-5 col-lg-6 thread-body">
+                                <a href="{{ path('user_view_message', {'id': message.session.id}) }}">
+                                    <p>{{ message.content }}</p></a>
+                            </div>
+                            {% if message.session.isRead == false %}
+                                <span style="float: right; color: red">Unread</span>
                             {% endif %}
-                    </div>
-                    <hr>
-                {% endfor %}
+                        </div>
+                        <hr>
+                    {% endfor %}
                 </div>
             </li>
         </ul>

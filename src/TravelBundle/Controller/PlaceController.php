@@ -2,7 +2,6 @@
 
 namespace TravelBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,19 +47,9 @@ class PlaceController extends Controller
                 ->getRepository(User::class)
                 ->find($currentUser->getId());
 
-            $place->setCountry(Intl::getRegionBundle()->getCountryName($place->getCountry()));
-
             $place->setOwner($currentUser);
 
-
-//
-//            $uri = $request->getRequestUri();
-//            $uri = str_replace('/addPlace?place%5Bname%5D=a&place%5Bdescription%5D=a&place%5Baddress%5D=a&place%5Bprice%5D=1', '', $uri);
-//            $files = array_filter(explode('&place%5Bphotos%5D=', $uri));
-
-
             $place->setPhoto($this->generateImg($place->getPhoto()));
-
 
 
             if (!$currentUser->isOwner()){
@@ -158,9 +147,6 @@ class PlaceController extends Controller
                 $place->setPhoto($this->generateImg($place->getPhoto()));
             }
 
-
-            $place->setCountry(Intl::getRegionBundle()->getCountryName($place->getCountry()));
-
             $em = $this->getDoctrine()->getManager();
             $em->merge($place);
             $em->flush();
@@ -208,6 +194,8 @@ class PlaceController extends Controller
 
         if ($form->isSubmitted()) {
 
+//            $search->setCountry(Intl::getRegionBundle()->getCountryName($search->getCountry()));
+
             if ($search !== $currentUser->getSearch()){
                 $currentUser->setSearch($search);
                 $search->setUser($currentUser);
@@ -236,6 +224,7 @@ class PlaceController extends Controller
         $search = $this->getDoctrine()->getRepository(Search::class)->find($searchId);
 
         $places = $this->getDoctrine()->getRepository(Place::class)->findAllBy($search);
+
 
        return $this->render('place/all_selected.html.twig', ['places' => $places, 'search' => $search]);
     }
@@ -267,6 +256,9 @@ class PlaceController extends Controller
             $reservation->setPlace($place);
             $reservation->setStartDate($startDate);
             $reservation->setEndDate($endDate);
+
+            $totalPrice = str_replace('$', '', $request->request->get('totalPrice'));
+            $reservation->setTotalMoney($totalPrice);
 
 
             $em = $this->getDoctrine()->getManager();

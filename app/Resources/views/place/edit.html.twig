@@ -10,24 +10,28 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Place Name</label>
                         <div class="col-sm-4 ">
-                            <input type="text" class="form-control" placeholder="Place Name"
-                                   name="place[name]" value="{{ place.name }}">
+                            {{ form_widget(form.name, { 'attr':{'id': 'name_form', 'class': 'form-control'} }) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label">Description</label>
                         <div class="col-sm-6">
-                        <textarea class="form-control" rows="6"
-                                  name="place[description]">{{ place.description }}</textarea>
+                            {{ form_widget(form.description, { 'attr':{'id': 'description_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_capacity">Capacity</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'form-control'} }) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="article_title">Price per night</label>
                         <div class="col-sm-4 ">
-                            <input type="text" class="form-control" id="article_title" placeholder="Price per night"
-                                   name="place[price]"  value="{{ place.price }}">
+                            {{ form_widget(form.price, { 'attr':{'id': 'price_form', 'class': 'form-control'} }) }}
                         </div>
                     </div>
 
@@ -36,18 +40,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="form_country">Country</label>
+                        <label class="col-sm-4 control-label" for="form_address_country">Country</label>
                         <div class="col-sm-6">
-                            {{ form_widget(form.country, { 'attr':{'id': 'country_form', 'class': 'form-control'} }) }}
+                            {{ form_widget(form.address.country, { 'attr':{'id': 'country_address_form', 'class': 'form-control'} }) }}
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_street">City</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.address.city, { 'attr':{'id': 'coity_address_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="form_street">Street</label>
                         <div class="col-sm-6">
-                            <textarea class="form-control" rows="2"
-                                      name="place[street]">{{ place.street }}</textarea>
+                            {{ form_widget(form.address.street, { 'attr':{'id': 'street_address_form', 'class': 'form-control'} }) }}
                         </div>
                     </div>
 

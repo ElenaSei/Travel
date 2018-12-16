@@ -12,16 +12,10 @@ class HomeController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $country = str_replace('/?myCountry=', '', $request->getRequestUri());
 
-        $places = $this->getDoctrine()->getRepository(Place::class)->findBy(['country' => $country]);
-
-        if (empty($places)){
-
-            $places = $this->getDoctrine()->getRepository(Place::class)->findAll();
-        }
+        $places = $this->getDoctrine()->getRepository(Place::class)->findAll();
 
         return $this->render('home/index.html.twig', ['places' => $places]);
     }

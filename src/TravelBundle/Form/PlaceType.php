@@ -49,9 +49,7 @@ class PlaceType extends AbstractType
             ->add('price', MoneyType::class, array(
                 'currency' => ''
             ))
-            ->add('country', CountryType::class)
-            ->add('city', TextType::class)
-            ->add('street', TextareaType::class);
+            ->add('address', AddressType::class);
     }
 
     /**
