@@ -150,7 +150,7 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
-        return $this->render('message/view.html.twig', ['messages' => $messages]);
+        return $this->render('front-end/message/view.html.twig', ['messages' => $messages]);
 
     }
 }

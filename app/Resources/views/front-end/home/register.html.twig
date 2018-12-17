@@ -1,0 +1,56 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+
+    {% for msg in app.session.flashbag.get('info') %}
+        <div class="alert-danger">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
+            {{ msg }}
+        </div>
+    {% endfor %}
+
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form" method="post">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Register
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="user[username]" placeholder="Username">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter email">
+						<input class="input100" type="text" name="user[email]" placeholder="Email">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="user[password]" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Confirm password">
+						<input class="input100" type="password" name="confirm_password" placeholder="Confirm Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Register
+						</button>
+					</div>
+
+                    {{ form_row(form._token) }}
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

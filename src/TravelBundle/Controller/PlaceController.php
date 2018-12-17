@@ -5,7 +5,6 @@ namespace TravelBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Reservation;
@@ -37,7 +36,7 @@ class PlaceController extends Controller
                     ->getDoctrine()
                     ->getRepository(Place::class)
                     ->findOneBy(['name' => $place->getName()]) !== null){
-                throw new \Exception('This name has already taken!');
+               $this->addFlash('info','This name has already taken!');
             }
 
             $currentUser = $this->getUser();
@@ -51,6 +50,10 @@ class PlaceController extends Controller
 
             $place->setPhoto($this->generateImg($place->getPhoto()));
 
+            $address = $place->getAddress();
+
+            $place->setAddress($address);
+
 
             if (!$currentUser->isOwner()){
                 $role = $this
@@ -63,13 +66,14 @@ class PlaceController extends Controller
             }
 
             $em = $this->getDoctrine()->getManager();
+            $em->persist($address);
             $em->persist($place);
             $em->flush();
 
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('place/add.html.twig', ['form' => $form->createView()]);
+        return $this->render('front-end/place/add.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -209,14 +213,14 @@ class PlaceController extends Controller
                 $em->flush();
             }
 
-            return $this->redirectToRoute('place_selected', ['searchId' => $search->getId()]);
+            return $this->redirectToRoute('place_all', ['searchId' => $search->getId()]);
         }
 
         return $this->render('home/search.html.twig', ['form' => $form->createView()]);
     }
 
     /**
-     * @Route("/place/all_selected/{searchId}", name="place_selected")
+     * @Route("/place/all/{searchId}", name="place_all")
      * @param int $searchId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -226,7 +230,7 @@ class PlaceController extends Controller
         $places = $this->getDoctrine()->getRepository(Place::class)->findAllBy($search);
 
 
-       return $this->render('place/all_selected.html.twig', ['places' => $places, 'search' => $search]);
+       return $this->render('front-end/place/all.html.twig', ['places' => $places, 'search' => $search]);
     }
 
 

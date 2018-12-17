@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Travel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block stylesheets %}
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="{{ asset('front-end/images/icons/favicon.ico') }}"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/bootstrap/css/bootstrap-grid.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('front-end/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css"
+              href="{{ asset('front-end/fonts/iconic/css/material-design-iconic-font.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/animate/animate.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/css-hamburgers/hamburgers.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/animsition/css/animsition.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/select2/select2.min.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/daterangepicker/daterangepicker.css') }}">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/css/util.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('front-end/css/main.css') }}">
+        <!--===============================================================================================-->
+    {% endblock %}
+
+</head>
+<body class="bg">
+
+{% block header %}
+    <header>
+        <div class="mycontainer">
+            <div>
+                <nav>
+                    <ul>
+                        {% if app.user %}
+                        <li><a href="{{ path('homepage') }}">TRAVEL</a></li>
+                        {% if app.getUser().isOwner() %}
+                            <li><a href="{{ path('place_add') }}">Add place</a></li>
+                            <li><a href="{{ path('user_places') }}">My places</a></li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('place_add') }}">
+                                    Become host
+                                </a>
+                            </li>
+                        {% endif %}
+                        <li><a href="{{ path('user_trips') }}">My trips</a></li>
+                        <li><a href="{{ path('user_mailbox') }}">Messages</a></li>
+                        <li><a href="{{ path('security_logout') }}">Logout</a></li>
+                        {% else %}
+                        <li>
+                            <a href="{{ path('user_register') }}">
+                                REGISTER
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('security_login') }}">
+                                LOGIN
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    {% block main %}{% endblock %}
+{% endblock %}
+
+{% block footer %}
+    <footer>
+    </footer>
+{% endblock %}
+
+{% block javascripts %}
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/jquery/jquery-3.2.1.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/animsition/js/animsition.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('front-end/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/select2/select2.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/daterangepicker/moment.min.js') }}"></script>
+    <script src="{{ asset('front-end/daterangepicker/daterangepicker.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/countdowntime/countdowntime.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('front-end/js/main.js') }}"></script>
+
+{% endblock %}
+
+</body>
+</html>
+

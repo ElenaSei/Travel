@@ -1,0 +1,53 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" action="{{ path('homepage') }}" method="post">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+                    <span class="login100-form-title p-b-34 p-t-27">
+						Find a Place
+					</span>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.country, { 'attr':{'id': 'country_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xe88a;"></span>
+
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.city, { 'attr':{'id': 'city_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'form-control'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.endDate, { 'attr':{'id': 'endDate_form', 'class': 'form-control'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Find
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

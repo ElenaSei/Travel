@@ -1,0 +1,33 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+    <section>
+        <div class="message">
+            <div>
+                <h3>Chat</h3>
+            </div>
+
+            {% for message in messages %}
+
+            {#{% if app.user == message.sender %}#}
+
+            <div class="message-left">
+
+                <p>
+                    {{ message.content }}
+                </p>
+                <span class="time_date">{{ message.dateAdded|date('H:m Y-m-d') }}</span> </div>
+
+            </div>
+
+        {#{% else %}#}
+            <div class="message-rigth">
+                <p>{{ message.content }}</p>
+                <span class="time_date">{{ message.dateAdded|date('H:m Y-m-d') }}</span></div>
+            </div>
+        {#{% endif %}#}
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}
+

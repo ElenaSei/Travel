@@ -26,21 +26,24 @@ class UserController extends Controller
         $form->handleRequest($request);
 
 
+
         if ($form->isSubmitted()){
+
 
             if ($this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $user->getUsername()])){
                 $this->addFlash('info','Username already exists!');
-                return $this->render('user/register.html.twig', ['form' => $form->createView()]);
+                return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
             if ($this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $user->getEmail()])){
                 $this->addFlash('info','Email already exists!');
-                return $this->render('user/register.html.twig', ['form' => $form->createView()]);
+                return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
 
             if ($user->getPassword() !== $request->request->get('confirm_password')){
                 $this->addFlash('info','Password mismatch!');
-                return $this->render('user/register.html.twig', ['form' => $form->createView()]);
+                return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
+
 
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
@@ -54,14 +57,16 @@ class UserController extends Controller
 
             $user->addRole($role);
 
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
+
             return $this->redirectToRoute('security_login');
         }
 
-        return $this->render('user/register.html.twig', ['form' => $form->handleRequest()]);
+        return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
     }
 
     /**

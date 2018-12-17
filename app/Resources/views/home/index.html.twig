@@ -1,39 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for msg in app.session.flashbag.get('info') %}
-        <div class="alert-info">
-            <a href="#" class="close" data-dismiss="alert"></a>
-            {{ msg }}
-        </div>
-    {% endfor %}
-    <div class="content">
-        <div class="row">
-            {% for place in places %}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <article>
-                        <div>
-                        <a href="{{ path('place_view', {id: place.id}) }}">
-                            <img src="{{ asset('uploads/photos/' ~ place.photo ) }}" style="max-height: 100%; max-width: 100%;">
-                        </a>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('search') }}" method="post" enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Search Place</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="place_name">Country</label>
+                        <div class="col-sm-4 " >
+                            {{ form_widget(form.country, { 'attr':{'id': 'country_form', 'class': 'form-control'} }) }}
                         </div>
-                        <br/>
-                        <small class="author" style="padding-top: 10px">
-                            {{ place.address.countryName }}
-                        </small>
-                        <p>
-                            {{ place.price }}$
-                        </p>
-                        <a href="{{ path('place_view', {'id': place.id}) }}">
-                            <h3>{{ place.name }}</h3>
-                        </a>
-                        <p>
-                            {{ place.summary }}
-                        </p>
-                    </article>
-                </div>
-            {% endfor %}
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_city">City</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.city, { 'attr':{'id': 'city_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_capacity">Capacity</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_startDate">Start Date</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="form_endDate">End Date</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.endDate, { 'attr':{'id': 'endDate_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('homepage') }}">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 
+
 {% endblock %}
+

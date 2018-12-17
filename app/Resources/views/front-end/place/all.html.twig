@@ -1,0 +1,28 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+    {% for msg in app.session.flashbag.get('info') %}
+<div class="alert-info">
+    <a href="#" class="close" data-dismiss="alert"></a>
+    {{ msg }}
+</div>
+{% endfor %}
+
+    <section>
+        {% for place in places %}
+        <article>
+            <header>
+                <h1><a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">{{ place.name }}</a></h1>
+            </header>
+            <p><strong>{{ place.price }}$</strong></p>
+            <a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">
+                <img src="{{ asset('uploads/photos/' ~ place.photo ) }}" style="max-height: 100%; max-width: 100%;">
+            </a>
+            <small>{{ place.address.countryName }}</small>
+            {#<p>#}
+                {#{{ place.summary }}#}
+            {#</p>#}
+        </article>
+        {% endfor %}
+    </section>
+{% endblock %}
