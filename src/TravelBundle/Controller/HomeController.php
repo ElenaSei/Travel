@@ -20,32 +20,27 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
-        $search = $this->getDoctrine()->getRepository(Search::class)->findOneBy(['user' => $currentUser]);
-
-        if (empty($search)){
-            $search = new Search();
-        }
-
+        $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
 
-//            $search->setCountry(Intl::getRegionBundle()->getCountryName($search->getCountry()));
+            $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
 
-            if ($search !== $currentUser->getSearch()){
+            if ($currentUser->getSearch() === null){
                 $currentUser->setSearch($search);
                 $search->setUser($currentUser);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($search);
-                $em->flush();
             }else{
-
-                $em = $this->getDoctrine()->getManager();
-                $em->merge($search);
-                $em->flush();
+                $search = $this->getDoctrine()->getRepository(Search::class)->findOneBy(['user' => $currentUser]);
+                $form = $this->createForm(SearchType::class, $search);
+                $form->handleRequest($request);
             }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($search);
+            $em->flush();
+
 
             return $this->redirectToRoute('place_all', ['searchId' => $search->getId()]);
         }

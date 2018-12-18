@@ -78,43 +78,18 @@ class PlaceController extends Controller
 
     /**
      * @Route("/view/{id}", name="place_view")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($id, Request $request){
+    public function viewAction($id){
         $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy(['id' => $id]);
-        $user = $this->getUser();
-
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-        $form->handleRequest($request);
-
-        if (isset($request) && $request->isMethod('post')){
-
-            $daterange = explode(' - ', $request->get('daterange'));
-            $startDate = $daterange[0];
-            $endDate = $daterange[1];
-
-            $reservation->setRenter($user);
-            $reservation->setPlace($place);
-            $reservation->setStartDate($startDate);
-            $reservation->setEndDate($endDate);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($reservation);
-            $em->flush();
-
-            return $this->redirectToRoute('homepage');
-
-        }
 
         if ($place === null){
             throw new \Exception('Undefined place');
         }
 
-
-        return $this->render('place/view.html.twig', ['place' => $place, 'form' => $form->createView()]);
+        return $this->render('place/view.html.twig', ['place' => $place]);
     }
 
     /**
@@ -178,49 +153,8 @@ class PlaceController extends Controller
     }
 
     /**
-     * @Route("/search", name="search")
-     * @param Request $request
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function searchAction(Request $request){
-        $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
-        $search = $this->getDoctrine()->getRepository(Search::class)->findOneBy(['user' => $currentUser]);
-
-        if (empty($search)){
-            $search = new Search();
-        }
-
-        $form = $this->createForm(SearchType::class, $search);
-        $form->handleRequest($request);
-
-
-
-        if ($form->isSubmitted()) {
-
-//            $search->setCountry(Intl::getRegionBundle()->getCountryName($search->getCountry()));
-
-            if ($search !== $currentUser->getSearch()){
-                $currentUser->setSearch($search);
-                $search->setUser($currentUser);
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($search);
-                $em->flush();
-            }else{
-
-                $em = $this->getDoctrine()->getManager();
-                $em->merge($search);
-                $em->flush();
-            }
-
-            return $this->redirectToRoute('place_all', ['searchId' => $search->getId()]);
-        }
-
-        return $this->render('home/search.html.twig', ['form' => $form->createView()]);
-    }
-
-    /**
      * @Route("/place/all/{searchId}", name="place_all")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param int $searchId
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -236,6 +170,7 @@ class PlaceController extends Controller
 
     /**
      * @Route("/place/{id}/book/{searchId}", name="place_book")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
      * @param $searchId
      * @return \Symfony\Component\HttpFoundation\Response

@@ -23,14 +23,14 @@
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter capacity">
-                        {#<input class="input100" type="number" name="place[capacity]" placeholder="Capacity">#}
-                        {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="number" name="place[capacity]" placeholder="Capacity">
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter price per night">
-                        <input class="input100" type="number" name="place[price]" placeholder="Price per night">
+                        {#<input class="input100" type="number" name="place[price]" placeholder="Price per night">#}
+                        {{ form_widget(form.price, { 'attr':{'id': 'price_form', 'class': 'input100'} }) }}
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
 

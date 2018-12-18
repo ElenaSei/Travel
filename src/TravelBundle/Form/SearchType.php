@@ -18,8 +18,16 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', CountryType::class)
-            ->add('city', TextType::class)
+            ->add('country', CountryType::class, array(
+                'placeholder' => 'Country',
+                'required' => true
+            ))
+            ->add('city', TextType::class, array(
+                'attr' => array(
+                    'placeholder' => 'City'
+                ),
+                'required' => true
+            ))
             ->add('capacity', ChoiceType::class, array(
                     'choices' => array(
                         '1' => 1,
@@ -32,7 +40,9 @@ class SearchType extends AbstractType
                         '8' => 8,
                         '9' => 9,
                         '10' => 10
-                    )
+                    ),
+                    'placeholder' => 'Capacity',
+                    'required' => true
                 )
             )
             ->add('startDate', DateType::class, array(
@@ -41,7 +51,9 @@ class SearchType extends AbstractType
                     'year' => 'Year',
                      'month' => 'Month',
                      'day' => 'Day'
-                  ))
+                  ),
+                    'required' => true
+                )
             )
             ->add('endDate', DateType::class, array(
                 'widget' => 'choice',
@@ -49,7 +61,8 @@ class SearchType extends AbstractType
                     'year' => 'Year',
                     'month' => 'Month',
                     'day' => 'Day'
-                )
+                ),
+                'required' => true
             ))
         ;
     }/**

@@ -34,18 +34,6 @@
                     </button>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-left">
-                        {% if app.user %}
-                        <li>
-                            <a href="{{ path('search') }}">
-                                Find a place
-                            </a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                    {#{% include 'home/search_box.twig' %}#}
-
-
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
                             {% if app.getUser().isOwner()  %}

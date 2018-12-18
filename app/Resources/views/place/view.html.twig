@@ -50,53 +50,10 @@
                             </div>
                         </footer>
                     </div>
-
-                    {#{% if (app.getUser().getId() is not same as (place.ownerId)) %}#}
-                    {#<div class="col-lg-offset-6 table-bordered">#}
-                            {#<h2 class="text-center">Book</h2>#}
-                        {#<div>#}
-                            {#<p>Price per night: {{ place.price }}$</p>#}
-                            {#<form  action="{{ path('place_view', {id: place.id})  }}" method="post">#}
-                                {#Pick up dates: <input type="text" name="daterange"/>#}
-                                {#<input type="submit" value="Submit">#}
-                            {#</form>#}
-                        {#</div>#}
-                    {#</div>#}
-                    {#{% endif %}#}
                 </article>
             </div>
         </div>
     </div>
-
-
-
-    {#<script>#}
-        {#$(function() {#}
-            {#$('input[name="daterange"]').daterangepicker({#}
-                {#opens: 'left'#}
-            {#}, function(start, end, label) {#}
-                {#console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));#}
-            {#});#}
-        {#});#}
-
-    {#</script>#}
-
-    {#<script>#}
-        {#var coll = document.getElementsByClassName("collapsible");#}
-        {#var i;#}
-
-        {#for (i = 0; i < coll.length; i++) {#}
-            {#coll[i].addEventListener("click", function() {#}
-                {#this.classList.toggle("active");#}
-                {#var content = this.nextElementSibling;#}
-                {#if (content.style.display === "block") {#}
-                    {#content.style.display = "none";#}
-                {#} else {#}
-                    {#content.style.display = "block";#}
-                {#}#}
-            {#});#}
-        {#}#}
-    {#</script>#}
 
 {% endblock %}
 

@@ -26,11 +26,6 @@ class PlaceType extends AbstractType
             ->add('photo', FileType::class, array(
                 'label' => 'Photo (png, jpeg)',
                 'data' => null))
-//            ->add('photos', CollectionType::class, array(
-//                'entry_type' => FileType::class,
-//                'entry_options' => array(
-//                    'label' => 'Photo (png, jpeg)',
-//                    'data' => null)))
             ->add('capacity', ChoiceType::class, array(
                 'choices' => array(
                     '1' => 1,
@@ -43,11 +38,16 @@ class PlaceType extends AbstractType
                     '8' => 8,
                     '9' => 9,
                     '10' => 10
-                )
-                )
+                ),
+                'placeholder' => 'Capacity',
+                'required' => true
+            )
             )
             ->add('price', MoneyType::class, array(
-                'currency' => ''
+                'currency' => '',
+                'attr' => array(
+                    'placeholder' => 'Price per night'
+                )
             ))
             ->add('address', AddressType::class);
     }
