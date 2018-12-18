@@ -14,6 +14,12 @@
 						Log in
 					</span>
 
+                    {% if error %}
+                        <div style="text-align: center; padding-bottom: 24px">
+                            <p style="color: red">Wrong username or password!</p>
+                        </div>
+                    {% endif %}
+
                     <div class="wrap-input100 validate-input" data-validate="Enter username">
                         <input class="input100" type="text" name="_username" placeholder="Username">
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
@@ -31,7 +37,7 @@
                             Login
                         </button>
                     </div>
-                    
+
                 </form>
             </div>
         </div>

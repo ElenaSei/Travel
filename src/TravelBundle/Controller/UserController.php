@@ -31,11 +31,11 @@ class UserController extends Controller
 
 
             if ($this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $user->getUsername()])){
-                $this->addFlash('info','Username already exists!');
+                $this->addFlash('info','Username is taken!');
                 return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
             if ($this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $user->getEmail()])){
-                $this->addFlash('info','Email already exists!');
+                $this->addFlash('info','Email is taken!');
                 return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
 
