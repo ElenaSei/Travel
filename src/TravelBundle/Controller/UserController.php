@@ -95,7 +95,7 @@ class UserController extends Controller
         $currentUser = $this->getUser();
         $places = $this->getDoctrine()->getRepository(Place::class)->findBy(['owner' => $currentUser]);
 
-        return $this->render('user/places.html.twig', ['places' => $places]);
+        return $this->render('front-end/user/places.html.twig', ['places' => $places]);
     }
 
     /**

@@ -13,7 +13,6 @@ use TravelBundle\Entity\Search;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\PlaceType;
 use TravelBundle\Form\ReservationType;
-use TravelBundle\Form\SearchType;
 
 class PlaceController extends Controller
 {
@@ -102,8 +101,6 @@ class PlaceController extends Controller
     public function editAction($id, Request $request){
         $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy(['id' => $id]);
 
-        $photo = $place->getPhoto();
-
         if ($place === null){
             throw new \Exception('Undefined place');
         }
@@ -112,13 +109,13 @@ class PlaceController extends Controller
             throw new \Exception('You are not owner of this place!');
         }
 
+        $photo = $place->getPhoto();
+
         $form = $this->createForm(PlaceType::class, $place);
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted()){
-            $currentUser = $this->getUser();
-            $place->setOwner($currentUser);
 
             if ($place->getPhoto() === null){
                 $place->setPhoto($photo);
@@ -133,7 +130,7 @@ class PlaceController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render('place/edit.html.twig', ['place' => $place, 'form' => $form->createView()]);
+        return $this->render('front-end/place/edit.html.twig', ['place' => $place, 'form' => $form->createView()]);
     }
 
     /**

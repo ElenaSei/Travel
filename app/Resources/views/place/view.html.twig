@@ -39,7 +39,7 @@
                             <p>{{ place.description }}</p>
                         </div>
                         <hr>
-                        <p>Contact <a href="{{ path('send_message', {ownerId: place.ownerId, placeId: place.id}) }}">{{ place.owner.username }}</a> </p>
+                        <p>Contact <a href="{{ path('send_message', {recipientId: place.ownerId}) }}">{{ place.owner.username }}</a> </p>
                         <footer>
                             <div class="pull-right">
                                 {% if app.user and (app.User == place.owner or app.getUser().isAdmin()) %}

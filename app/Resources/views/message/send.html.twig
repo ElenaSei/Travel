@@ -9,12 +9,19 @@
     {% endfor %}
     <div class="container body-content span=8 offset=2">
         <div class="well">
-            <form class="form-horizontal" action="{{ path('send_message', {ownerId: ownerId, placeId: placeId}) }}" method="post" enctype="multipart/form-data">
+            <form class="form-horizontal" action="{{ path('send_message', {ownerId: ownerId}) }}" method="post" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Send Message</legend>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="message_content">Content</label>
+                        <label class="col-sm-4 control-label" for="message_content">To:</label>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.content, { 'attr':{'id': 'content_form', 'class': 'form-control'} }) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="message_content">Content:</label>
                         <div class="col-sm-6">
                             {{ form_widget(form.content, { 'attr':{'id': 'content_form', 'class': 'form-control'} }) }}
                         </div>

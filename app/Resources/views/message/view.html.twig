@@ -21,7 +21,7 @@
             {% else %}
 
             <div class="incoming_msg">
-                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                <div class="incoming_msg_img"> <a href="{{ path('send_message', {recipientId: message.sender.id}) }}"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"></a> </div>
                 <div class="received_msg">
                     <div class="received_withd_msg">
                         <p>{{ message.content }}</p>

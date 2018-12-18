@@ -34,29 +34,30 @@ class MessageController extends Controller
     }
 
     /**
-     * @Route("/user/{ownerId}/message/{placeId}", name="send_message")
+     * @Route("/message/{recipientId}", name="send_message")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @param $placeId
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function sendAction($ownerId, $placeId, Request $request)
+    public function sendAction($recipientId, Request $request)
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
+        /**
+         * @var User $recipient;
+         */
+
+        $recipient = $this->userService->findOne($recipientId);
+
         if ($form->isSubmitted()){
             $currentUser = $this->getUser();
+
             /**
              * @var User $sender;
              */
             $sender = $this->userService->findOne($currentUser);
-
-            /**
-             * @var User $recipient;
-             */
-            $recipient = $this->userService->findOne($ownerId);
 
             $message->setRecipient($recipient);
             $message->setSender($sender);
@@ -70,37 +71,20 @@ class MessageController extends Controller
 
                 $session->setIsRead(false);
 
-                if(!$this->sessionService->save($session)){
-                    $this->addFlash('info', 'Session could not be saved!');
-
-                    return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
-                }
-
                 $sender->addSessions($session);
                 $recipient->addSessions($session);
             }
 
             $session->setIsRead(false);
 
-            if (!$this->sessionService->update($session)){
-                $this->addFlash('info', 'Session could not be update!');
-
-                return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
-            }
-
             $message->setSession($session);
 
-            if (!$this->messageService->save($message)){
-                $this->addFlash('info', 'Message could not send!');
-
-                return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
-            }
 
             $this->addFlash('info', 'Message send successfully!');
-            return $this->redirectToRoute('place_view', ['id' => $placeId]);
+            return $this->redirectToRoute('user_mailbox');
         }
 
-        return $this->render('message/send.html.twig', ['form' => $form->createView(), 'placeId' => $placeId, 'ownerId' => $ownerId]);
+        return $this->render('front-end/message/send.html.twig', ['form' => $form->createView(), 'recipient' => $recipient]);
     }
 
     /**
@@ -150,7 +134,7 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
-        return $this->render('front-end/message/view.html.twig', ['messages' => $messages]);
+        return $this->render('message/view.html.twig', ['messages' => $messages]);
 
     }
 }
