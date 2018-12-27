@@ -8,7 +8,11 @@
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
-
+                    {% for msg in app.session.flashbag.get('info') %}
+                        <div style="text-align: center; padding-bottom: 24px">
+                            <p style="color: green">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
                     <span class="login100-form-title p-b-34 p-t-27">
 						Find a Place
 					</span>

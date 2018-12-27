@@ -1,0 +1,62 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+
+                        <article class="bookInfo">
+                            <div class="book-img-container">
+                                {#<a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">#}
+                                <img class="place-img" src="{{ asset('uploads/photos/' ~ place.photo) }}">
+                                    {#<p class="price">{{ place.price }}$ per night</p>#}
+                            </div>
+                            <section class="book-middle-part">
+                                <h1>{{ place.name }}</h1>
+                                <p>{{ place.address.countryName }} - {{ place.address.city }}</p>
+                                <p class="description">asdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasdasdsadasdasd</p>
+                            </section>
+
+                            <section class="form-ctr">
+                                    <form method="post">
+                                        <section>
+                                            {% set difference = date(search.endDate).diff(date(search.startDate)) %}
+                                            {% set leftDays = difference.days %}
+                                            <div class="form-element">
+                                                <label class=" control-label" for="form_startDate">Start Date:</label>
+
+                                                <input type="text" placeholder="Place Name"
+
+                                                       name="startDate" value="{{ search.startDate|date('d M Y') }}"
+                                                       readonly="readonly">
+                                            </div>
+                                            <div class="form-element">
+                                                <label class=" control-label" for="form_endDate">End Date:</label>
+
+                                                <input type="text" placeholder="Place Name"
+                                                       name="endDate" value="{{ search.endDate|date('d M Y') }}"
+                                                       readonly="readonly">
+                                            </div>
+                                            <div class="form-element">
+                                                <label class=" control-label">Price per night:</label>
+
+                                                <input type="text" placeholder="Place Name"
+                                                       name="pricePerNights"
+                                                       value="{{ place.price }}$ x {{ leftDays }} days" readonly="readonly">
+                                            </div>
+                                            <div class="form-element">
+                                                <label class=" control-label">Total:</label>
+                                                <input type="text" placeholder="Total"
+                                                       name="totalPrice" value="{{ place.price * leftDays }}$"
+                                                       readonly="readonly">
+                                            </div>
+                                        </section>
+                                                <div id="button-container" class="container-login100-form-btn">
+                                                    <button class="login100-form-btn">
+                                                        Book
+                                                    </button>
+                                                </div>
+                                    </form>
+                                </section>
+                        </article>
+
+{% endblock %}
+
+

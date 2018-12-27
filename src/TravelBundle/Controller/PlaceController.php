@@ -170,6 +170,7 @@ class PlaceController extends Controller
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @param $id
      * @param $searchId
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function bookAction($id, $searchId, Request $request){
@@ -206,7 +207,7 @@ class PlaceController extends Controller
 
         }
 
-        return $this->render('place/book.html.twig', ['place' => $place, 'search' => $search]);
+        return $this->render('front-end/place/book.html.twig', ['place' => $place, 'search' => $search]);
     }
 
 

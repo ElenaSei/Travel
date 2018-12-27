@@ -582,22 +582,6 @@ ul li a{
     background-size: cover;
 }
 
-article{
-
-    background: rgba(255, 255, 255, 0.9);
-    width: 350px;
-    border-radius: 10px;
-    margin: 20px;
-    height: 300px;
-    display: inline-block;
-    float: left;
-
-}
-
-article img{
-    border-radius: 10px;
-    margin: 5% 7%;
-}
 article header{
     text-align: left;
     display: inline-block;
@@ -611,17 +595,7 @@ article header h1 a{
     background: transparent;
 }
 
-article p{
 
-    font-family: Poppins-Regular;
-    font-size: 24px;
-    line-height: 1.7;
-    color: #666666;
-    display: inline;
-    float: right;
-    padding-right: 30px;
-    padding-top: 10px;
-}
 
 article small{
     font-family: Poppins-Regular;
@@ -666,7 +640,169 @@ article small{
     border: thin solid #838383;
     overflow: hidden;
     margin: 26px 0 10px;
-
     float: right;
 
 }
+#main-container{
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap;
+}
+.singleAd{
+    width: 23%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 15px;
+
+}
+.img-container{
+    text-align: center;
+}
+article p{
+
+    font-family: Poppins-Regular;
+    line-height: 1.7;
+    color: #666666;
+}
+footer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.middle-part {
+    display: flex;
+    justify-content: space-between;
+}
+.middle-part h1{
+    font-size: 20px;
+    color: #555;
+
+}
+.price{
+    color:#666;
+    font-size: 17px;
+}
+
+.left-ctr,.right-ctr{
+    width: 45%;
+    margin: 10px;
+}
+.left-ctr{
+    width: 65%;
+}
+.right-ctr{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-ctr{
+    width: 100%;
+    height: 55%;
+    text-align: center;
+    font-family: Poppins-Medium;
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.2;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:15px 25px;
+    border-radius: 25px;
+    background: white;
+}
+.book{
+    vertical-align: bottom;
+}
+.btn-ctr:hover{
+    background: #d1a400;
+    color:white;
+    /*transform: scale(1.1);*/
+}
+.place-img{
+    max-width: 100%;
+}
+.bookInfo{
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: space-around;
+
+}
+.book-img-container{
+    text-align: center;
+    padding-top: 32px;
+}
+.book-img-container .place-img{
+    width: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+}
+.form-ctr form section{
+    background: white;
+    padding: 8px;
+    border-radius: 10px;
+}
+.form-ctr form input{
+    background: #d8d8d8;
+    border-radius: 3px;
+    margin: 10px 5px;
+    padding: 5px;
+    font-size: 15px;
+}
+.form-group{
+    display: flex;
+}
+.inputField-ctr {
+    display: flex;
+    flex-direction: column;
+}
+.form-element{
+    display: flex;
+}
+.form-element label{
+    width: 50%;
+    text-align: left;
+    padding-top:12px;
+    font-size: 17px;
+}
+#button-container{
+    margin-top: 10px;
+}
+.bookInfo>*{
+    width: 33%  ;
+}
+.book-middle-part h1{
+    text-align: center;
+    font-size: 24px;
+}
+.book-middle-part p:first-of-type{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-ctr form h2{
+    font-size: 20px;
+}
+.book-middle-part .description{
+    word-break: break-word;
+    padding: 0 20px;
+}
+.book-img-container,.form-ctr{
+    padding-top: 30px;
+}
+.price{
+    margin-top: 20px;
+    font-size: 20px;
+    color:black;
+}
+
+

@@ -8,17 +8,32 @@
 </div>
 {% endfor %}
 
-    <section>
+    <section id="main-container">
         {% for place in places %}
-        <article>
-            <header>
-                <h1><a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">{{ place.name }}</a></h1>
-            </header>
-            <p><strong>{{ place.price }}$</strong></p>
-            <a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">
-                <img src="{{ asset('uploads/photos/' ~ place.photo ) }}" style="max-height: 100%; max-width: 100%;">
-            </a>
-            <small>{{ place.address.countryName }}</small>
+        <article class="singleAd">
+            <div class="img-container">
+                {#<a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">#}
+                    <img class="place-img" src="{{ asset('uploads/photos/' ~ place.photo ) }}">
+            </div>
+
+            <section class="middle-part">
+                <section class="left-ctr">
+                    <p>{{ place.address.countryName }} - {{ place.address.city }}</p>
+                    <h1>{{ place.name }}</h1>
+                    <p class="price">{{ place.price }}$ per night</p>
+                </section>
+                <section class="right-ctr">
+
+                        <a class="book" href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">
+                            <div class="btn-ctr">
+                                Book
+                            </div>
+                        </a>
+                </section>
+            </section>
+
+           
+
             {#<p>#}
                 {#{{ place.summary }}#}
             {#</p>#}

@@ -1,0 +1,74 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" action="{{ path('place_edit', {id: place.id}) }}" method="post" enctype="multipart/form-data">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+                    <span class="login100-form-title p-b-34 p-t-27">
+						Detail
+					</span>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.name, { 'attr':{'id': 'name_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xe88a;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter description">
+                        {{ form_widget(form.description, { 'attr':{'id': 'description_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter price per night">
+                        {{ form_widget(form.price, { 'attr':{'id': 'price_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter country">
+                        {{ form_widget(form.address.country, { 'attr':{'id': 'country_address_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter city">
+                        {{ form_widget(form.address.city, { 'attr':{'id': 'coity_address_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter street">
+                        {{ form_widget(form.address.street, { 'attr':{'id': 'street_address_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Upload photo">
+                        {#<input class="input100" type="text" name="place[photo]" placeholder="Upload photo">#}
+                        {{ form_widget(form.photo, { 'attr':{'id': 'photo_form', 'class': 'input100'} }) }}
+                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Edit
+                        </button>
+                    </div>
+
+                    <div class="text-center p-t-90">
+                        <a class="txt1" href="{{ path('homepage') }}">
+                            Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
