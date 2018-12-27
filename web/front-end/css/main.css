@@ -877,12 +877,14 @@ footer{
     color: #666666;
     display: inline;
     padding: 0 5px 0 38px;
+    width: 47%;
 }
 
 .msg-content{
     font-size: 16px;
     color: #666666;
     display: inline;
+    width: 70%;
 }
 
 .msg-right{
@@ -894,8 +896,6 @@ footer{
 .msg-user{
     color: #444;
 }
-
-
 
 .containerMsg{max-width:1170px; margin:auto;}
 img{ max-width:100%;}

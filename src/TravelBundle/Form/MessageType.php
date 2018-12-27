@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Tests\Fixtures\Entity;
+use TravelBundle\Entity\Session;
 
 class MessageType extends AbstractType
 {
@@ -16,7 +18,7 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content', TextareaType::class);
+            ->add('content', TextType::class);
     }/**
      * {@inheritdoc}
      */

@@ -125,6 +125,25 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()){
+            $message->setSession($session);
+            $message->setSender($this->getUser());
+
+            foreach ($session->getUsers() as $user){
+                if ($user !== $this->getUser()){
+                    $message->setRecipient($user);
+                    break;
+                }
+            }
+
+            $this->messageService->save($message);
+
+        }
+
         $messages = $this->messageService->findAllFromSession(['session' => $session], ['dateAdded' => 'ASC']);
 
         $session->setIsRead(true);
@@ -135,7 +154,8 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
-        return $this->render('front-end/message/view.html.twig', ['messages' => $messages]);
+
+        return $this->render('front-end/message/view.html.twig', ['messages' => $messages, 'form' => $form->createView(), 'id' => $session->getId()]);
 
     }
 }

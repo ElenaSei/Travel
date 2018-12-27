@@ -63,12 +63,18 @@
 
                     {% endif %}
                 {% endfor %}
+                <form method="post"  action="{{ path('user_view_message', {'id': id}) }}" enctype="multipart/form-data">
                 <div class="type_msg">
                     <div class="input_msg_write">
-                        <input type="text" class="write_msg" placeholder="Type a message" />
-                        <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                        <input type="text" class="write_msg" placeholder="Type a message" name="message[content]" />
+                        <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Send
+                        </button>
+                        </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>
