@@ -11,20 +11,40 @@ namespace TravelBundle\Repository;
 
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
- public function findPast($place){
-     return $this->createQueryBuilder('reservation')
-         ->where('reservation.startDate <= :date')
-         ->andWhere('reservation.place = :place')
-         ->setParameters([':date' => new \DateTime('now'), ':place' => $place])
-         ->getQuery()
-         ->getResult();
- }
+     public function findPastByPlace($place){
+         return $this->createQueryBuilder('reservation')
+             ->where('reservation.startDate <= :date')
+             ->andWhere('reservation.place = :place')
+             ->setParameters([':date' => new \DateTime('now'), ':place' => $place])
+             ->getQuery()
+             ->getResult();
+     }
 
-    public function findRecent($place){
+    public function findRecentByPlace($place){
         return $this->createQueryBuilder('reservation')
             ->where('reservation.startDate > :date')
             ->andWhere('reservation.place = :place')
             ->setParameters([':date' => new \DateTime('now'), ':place' => $place])
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findPastByUser($user){
+        return $this->createQueryBuilder('reservation')
+            ->where('reservation.startDate <= :date')
+            ->andWhere('reservation.renter = :user')
+            ->setParameters([':date' => new \DateTime('now'), ':user' => $user])
+            ->orderBy('reservation.startDate', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findRecentByUser($user){
+        return $this->createQueryBuilder('reservation')
+            ->where('reservation.startDate > :date')
+            ->andWhere('reservation.renter = :user')
+            ->setParameters([':date' => new \DateTime('now'), ':user' => $user])
+            ->orderBy('reservation.startDate', 'DESC')
             ->getQuery()
             ->getResult();
     }

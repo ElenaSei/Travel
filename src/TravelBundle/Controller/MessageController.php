@@ -36,6 +36,7 @@ class MessageController extends Controller
     /**
      * @Route("/message/{recipientId}", name="send_message")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param $recipientId
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */

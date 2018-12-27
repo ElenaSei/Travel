@@ -76,13 +76,14 @@ class UserController extends Controller
     public function userTrips(){
         $currentUser = $this->getUser();
 
-        $trips = $this->getDoctrine()->getRepository(Reservation::class)->findBy(['renter' => $currentUser], ['startDate' => 'DESC']);
+        $trips['past'] = $this->getDoctrine()->getRepository(Reservation::class)->findPastByUser(['renter' => $currentUser]);
+        $trips['recent'] = $this->getDoctrine()->getRepository(Reservation::class)->findRecentByUser(['renter' => $currentUser]);
 
         if (empty($trips)){
             $this->addFlash('info', 'You don`t have any trips yet');
         }
 
-        return $this->render('user/trips.html.twig', ['trips' => $trips]);
+        return $this->render('front-end/user/trips.html.twig', ['trips' => $trips]);
 
     }
 

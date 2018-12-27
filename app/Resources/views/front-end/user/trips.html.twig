@@ -1,0 +1,102 @@
+{% extends 'front-end/base.html.twig' %}
+
+{% block main %}
+    {#{% for msg in app.session.flashbag.get('info') %}#}
+        {#<div class="alert-info">#}
+            {#<a href="#" class="close" data-dismiss="alert"></a>#}
+            {#{{ msg }}#}
+        {#</div>#}
+    {#{% endfor %}#}
+    <article class="bookInfo">
+        <h3>Recent Bookings</h3>
+    </article>
+    {% for trip in trips.recent %}
+        <article class="bookInfo">
+            <div class="book-img-container">
+                {#<a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">#}
+                <img class="place-img" src="{{ asset('uploads/photos/' ~ trip.place.photo) }}">
+                {#<p class="price">{{ place.price }}$ per night</p>#}
+            </div>
+            <section class="book-middle-part">
+                <h1>{{ trip.place.name }}</h1>
+                <p>{{ trip.place.address.countryName }} - {{ trip.place.address.city }}</p>
+                <p class="description">{{ trip.place.description }}</p>
+                <p class="username">Contact <a href="{{ path('send_message', {'recipientId': trip.place.owner.id}) }}">{{ trip.place.owner.username }}</a></p>
+            </section>
+
+            <section class="form-ctr">
+                <form method="post">
+                    <section>
+                        <div class="form-element">
+                            <label class=" control-label" for="form_startDate">Start Date:</label>
+
+                            <input type="text" placeholder="Place Name"
+
+                                   name="startDate" value="{{ trip.startDate|date('d M Y') }}"
+                                   readonly="readonly">
+                        </div>
+                        <div class="form-element">
+                            <label class=" control-label" for="form_endDate">End Date:</label>
+
+                            <input type="text" placeholder="Place Name"
+                                   name="endDate" value="{{ trip.endDate|date('d M Y') }}"
+                                   readonly="readonly">
+                        </div>
+                        <div class="form-element">
+                            <label class=" control-label">Total Price:</label>
+                            <input type="text" placeholder="Total"
+                                   name="totalPrice" value="{{ trip.totalMoney }}$"
+                                   readonly="readonly">
+                        </div>
+                    </section>
+                </form>
+            </section>
+        </article>
+    {% endfor %}
+    <article class="bookInfo">
+        <h3>Past Bookings</h3>
+    </article>
+    {% for trip in trips.past %}
+        <article class="bookInfo">
+            <div class="book-img-container">
+                {#<a href="{{ path('place_book', {id: place.id, searchId: search.id}) }}">#}
+                <img class="place-img" src="{{ asset('uploads/photos/' ~ trip.place.photo) }}">
+                {#<p class="price">{{ place.price }}$ per night</p>#}
+            </div>
+            <section class="book-middle-part">
+                <h1>{{ trip.place.name }}</h1>
+                <p>{{ trip.place.address.countryName }} - {{ trip.place.address.city }}</p>
+                <p class="description">{{ trip.place.description }}</p>
+                <p class="username">Contact <a href="{{ path('send_message', {'recipientId': trip.place.owner.id}) }}">{{ trip.place.owner.username }}</a></p>
+            </section>
+
+            <section class="form-ctr">
+                <form method="post">
+                    <section>
+                        <div class="form-element">
+                            <label class=" control-label" for="form_startDate">Start Date:</label>
+
+                            <input type="text" placeholder="Place Name"
+
+                                   name="startDate" value="{{ trip.startDate|date('d M Y') }}"
+                                   readonly="readonly">
+                        </div>
+                        <div class="form-element">
+                            <label class=" control-label" for="form_endDate">End Date:</label>
+
+                            <input type="text" placeholder="Place Name"
+                                   name="endDate" value="{{ trip.endDate|date('d M Y') }}"
+                                   readonly="readonly">
+                        </div>
+                        <div class="form-element">
+                            <label class=" control-label">Total Price:</label>
+                            <input type="text" placeholder="Total"
+                                   name="totalPrice" value="{{ trip.totalMoney }}$"
+                                   readonly="readonly">
+                        </div>
+                    </section>
+                </form>
+            </section>
+        </article>
+    {% endfor %}
+{% endblock %}
