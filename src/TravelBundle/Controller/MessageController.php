@@ -102,7 +102,7 @@ class MessageController extends Controller
 
         $messages = $this->messageService->findOnePerSession($sessions, ['dateAdded' => 'DESC']);
 
-        return $this->render('message/all.html.twig', ['messages' => $messages]);
+        return $this->render('front-end/message/all.html.twig', ['messages' => $messages]);
     }
 
     /**
@@ -135,7 +135,7 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
-        return $this->render('message/view.html.twig', ['messages' => $messages]);
+        return $this->render('front-end/message/view.html.twig', ['messages' => $messages]);
 
     }
 }

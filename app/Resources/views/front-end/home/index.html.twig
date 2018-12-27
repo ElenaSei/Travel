@@ -1,5 +1,8 @@
 {% extends 'front-end/base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+{% endblock %}
 {% block main %}
     <div class="limiter">
         <div class="container-login100">
@@ -30,8 +33,12 @@
                         {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
                     </div>
 
+                    {#<input type="text" name="daterange" />#}
+                    {#<input type="hidden" name="startDate" id="startDate">#}
+                    {#<input type="hidden" name="endDate" id="endDate">#}
+
                     <div class="wrap-input100 validate-input">
-                        {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'form-control'} }) }}
+                        {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form'} }) }}
                     </div>
 
                     <div class="wrap-input100 validate-input">
@@ -48,5 +55,28 @@
         </div>
     </div>
 {% endblock %}
+{#{% block javascripts %}#}
+    {#{{ parent() }}#}
+    {#<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>#}
+
+    {#<script>#}
+
+        {#$(function() {#}
+            {#$('input[name="daterange"]').daterangepicker({#}
+                {#opens: 'left'#}
+            {#}, function(startDate, endDate, label) {#}
+                {#console.log("A new date selection was made: " + startDate.format('YYYY-MM-DD') + ' to ' + endDate.format('YYYY-MM-DD'));#}
+            {#});#}
+
+        {#});#}
+
+
+
+        {#// jQuery(document).ready(function() {#}
+        {#//     $('.js-datepicker').datepicker();#}
+        {#// });#}
+    {#</script>#}
+{#{% endblock %}#}
+
 
 

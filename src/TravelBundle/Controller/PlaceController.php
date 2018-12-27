@@ -83,8 +83,8 @@ class PlaceController extends Controller
      */
     public function viewAction($id){
         $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy(['id' => $id]);
-        $reservations['past'] = $this->getDoctrine()->getRepository(Reservation::class)->findPast(['place' => $place]);
-        $reservations['recent'] = $this->getDoctrine()->getRepository(Reservation::class)->findRecent(['place' => $place]);
+        $reservations['past'] = $this->getDoctrine()->getRepository(Reservation::class)->findPastByPlace(['place' => $place]);
+        $reservations['recent'] = $this->getDoctrine()->getRepository(Reservation::class)->findRecentByPlace(['place' => $place]);
 
         if ($place === null){
             throw new \Exception('Undefined place');

@@ -4,6 +4,7 @@ namespace TravelBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -45,23 +46,24 @@ class SearchType extends AbstractType
                     'required' => true
                 )
             )
+//            ->add('daterange', CollectionType::class, array(
+//                'startDate', DateType::class, array(
+//                    'widget' => 'single_text',
+//                ),
+//                'endDate', DateType::class
+//            ))
             ->add('startDate', DateType::class, array(
-                'widget' => 'choice',
-                 'placeholder' => array(
-                    'year' => 'Year',
-                     'month' => 'Month',
-                     'day' => 'Day'
-                  ),
-                    'required' => true
+                'widget' => 'single_text',
+                    'attr' => ['class' => 'js-datepicker']
                 )
             )
             ->add('endDate', DateType::class, array(
                 'widget' => 'choice',
-                'placeholder' => array(
-                    'year' => 'Year',
-                    'month' => 'Month',
-                    'day' => 'Day'
-                ),
+//                'placeholder' => array(
+//                    'year' => 'Year',
+//                    'month' => 'Month',
+//                    'day' => 'Day'
+//                ),
                 'required' => true
             ))
         ;
