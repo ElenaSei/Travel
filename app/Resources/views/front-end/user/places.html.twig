@@ -2,9 +2,8 @@
 
 {% block main %}
     {% for msg in app.session.flashbag.get('info') %}
-        <div class="alert-info">
-            <a href="#" class="close" data-dismiss="alert"></a>
-            {{ msg }}
+        <div class="flashback">
+            <p style="color: #05728f">{{ msg }}</p>
         </div>
     {% endfor %}
 

@@ -15,7 +15,7 @@
 					</span>
 
                     {% for msg in app.session.flashbag.get('info') %}
-                        <div style="text-align: center; padding-bottom: 24px">
+                        <div class="flashback">
                             <p style="color: red">{{ msg }}</p>
                         </div>
                     {% endfor %}
