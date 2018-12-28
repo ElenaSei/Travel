@@ -21,12 +21,14 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
             ->leftJoin('place.reservations', 'reservations')
             ->andWhere('reservations IS NULL OR ((reservations.startDate >= :endDate AND reservations.startDate >= :startDate) OR
                         (reservations.startDate <= :endDate AND reservations.startDate <= :startDate))')
+            ->andWhere('place.owner != :user')
             ->setParameters([
                 ':country' => $search->getCountry(),
                 ':city' => $search->getCity(),
                 ':capacity' => $search->getCapacity(),
                 ':endDate' => $search->getEndDate(),
-                ':startDate' => $search->getStartDate()
+                ':startDate' => $search->getStartDate(),
+                ':user' => $search->getUser()
             ])
             ->getQuery()
             ->getResult();

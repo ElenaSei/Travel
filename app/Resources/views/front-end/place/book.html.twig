@@ -12,6 +12,7 @@
                                 <h1>{{ place.name }}</h1>
                                 <p>{{ place.address.countryName }} - {{ place.address.city }}</p>
                                 <p class="description">{{ place.description }}</p>
+                                <p class="username">Contact <a href="{{ path('send_message', {'recipientId': place.owner.id}) }}">{{ place.owner.username }}</a></p>
                             </section>
 
                             <section class="form-ctr">

@@ -984,6 +984,14 @@ img{ max-width:100%;}
     font-size: 12px;
     margin: 8px 0 0;
 }
+
+.sender {
+    color: #444444;
+    display: block;
+    font-size: 14px;
+    margin: 8px 0 0;
+}
+
 .received_withd_msg { width: 57%;}
 .mesgs {
     float: left;

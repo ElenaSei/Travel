@@ -56,8 +56,10 @@
                         <div class="incoming_msg">
                             <div class="received_msg">
                                 <div class="received_withd_msg">
+                                    <span class="sender">{{ message.sender.username}}:</span>
                                     <p>{{ message.content }}</p>
-                                    <span class="time_date">{{ message.dateAdded|date('H:m Y-m-d') }}</span></div>
+                                    <span class="time_date">{{ message.dateAdded|date('H:m Y-m-d') }}</span>
+                                </div>
                             </div>
                         </div>
 

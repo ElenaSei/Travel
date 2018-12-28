@@ -77,13 +77,18 @@ class MessageController extends Controller
 
                 $session->setIsRead(false);
 
+                $this->sessionService->save($session);
+
                 $sender->addSessions($session);
                 $recipient->addSessions($session);
             }
 
             $session->setIsRead(false);
+            $this->sessionService->update($session);
 
             $message->setSession($session);
+
+            $this->messageService->save($message);
 
 
             $this->addFlash('info', 'Message send successfully!');

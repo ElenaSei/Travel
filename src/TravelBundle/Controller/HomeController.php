@@ -37,9 +37,6 @@ class HomeController extends Controller
                 $form->handleRequest($request);
             }
 
-            dump($request);
-            exit;
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($search);
             $em->flush();
