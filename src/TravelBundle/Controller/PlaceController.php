@@ -103,21 +103,24 @@ class PlaceController extends Controller
     public function editAction($id, Request $request){
         $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy(['id' => $id]);
 
-        if ($place === null){
-            throw new \Exception('Undefined place');
-        }
-
-        if ($place->getOwner() !== $this->getUser()){
-            throw new \Exception('You are not owner of this place!');
-        }
-
         $photo = $place->getPhoto();
 
         $form = $this->createForm(PlaceType::class, $place);
         $form->handleRequest($request);
 
+        $reservations = $this->getDoctrine()->getRepository(Reservation::class)->findRecentByPlace($place);
 
-        if ($form->isSubmitted()){
+
+        if ($place === null){
+            $this->addFlash('info','Undefined place');
+
+        }elseif ($place->getOwner() !== $this->getUser()){
+            $this->addFlash('info', 'You are not owner of this place!');
+
+        }elseif (!empty($reservations)){
+            $this->addFlash('info', 'This place has been booked. You cannot edit it.');
+
+        }elseif ($form->isSubmitted()){
 
             if ($place->getPhoto() === null){
                 $place->setPhoto($photo);
@@ -144,7 +147,7 @@ class PlaceController extends Controller
     public function deleteAction($id){
         $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy(['id' => $id]);
 
-        $reservations = $this->getDoctrine()->getRepository(Reservation::class)->findBy(['place' => $place]);
+        $reservations = $this->getDoctrine()->getRepository(Reservation::class)->findRecentByPlace($place);
 
         if (!empty($reservations)){
             $this->addFlash('info', 'The place is booked. You cannot deleted it.');

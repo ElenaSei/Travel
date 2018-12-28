@@ -9,8 +9,14 @@
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
+                    {% for msg in app.session.flashbag.get('info') %}
+                        <div class="flashback">
+                            <p style="color: red">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+
                     <span class="login100-form-title p-b-34 p-t-27">
-						Add Place
+						Edit Place
 					</span>
 
                     <div class="wrap-input100 validate-input">

@@ -13,7 +13,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
      public function findPastByPlace($place){
          return $this->createQueryBuilder('reservation')
-             ->where('reservation.startDate <= :date')
+             ->where('reservation.endDate < :date')
              ->andWhere('reservation.place = :place')
              ->setParameters([':date' => new \DateTime('now'), ':place' => $place])
              ->getQuery()
@@ -22,7 +22,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
 
     public function findRecentByPlace($place){
         return $this->createQueryBuilder('reservation')
-            ->where('reservation.startDate > :date')
+            ->where('reservation.endDate >= :date')
             ->andWhere('reservation.place = :place')
             ->setParameters([':date' => new \DateTime('now'), ':place' => $place])
             ->getQuery()
@@ -31,7 +31,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
 
     public function findPastByUser($user){
         return $this->createQueryBuilder('reservation')
-            ->where('reservation.startDate <= :date')
+            ->where('reservation.endDate < :date')
             ->andWhere('reservation.renter = :user')
             ->setParameters([':date' => new \DateTime('now'), ':user' => $user])
             ->orderBy('reservation.startDate', 'DESC')
@@ -41,7 +41,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
 
     public function findRecentByUser($user){
         return $this->createQueryBuilder('reservation')
-            ->where('reservation.startDate > :date')
+            ->where('reservation.endDate >= :date')
             ->andWhere('reservation.renter = :user')
             ->setParameters([':date' => new \DateTime('now'), ':user' => $user])
             ->orderBy('reservation.startDate', 'DESC')
