@@ -35,8 +35,7 @@ class SessionRepository extends \Doctrine\ORM\EntityRepository
 
     public function findOneByUsersId($recipient, $sender){
         return $this->createQueryBuilder('session')
-            ->where(':recipient MEMBER OF session.users')
-            ->andWhere(':sender MEMBER OF session.users')
+            ->where(':recipient MEMBER OF session.users AND :sender MEMBER OF session.users')
             ->setParameters([':recipient' => $recipient, ':sender' => $sender])
             ->getQuery()
             ->getOneOrNullResult();

@@ -9,13 +9,19 @@
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
 
+                    {% for msg in app.session.flashbag.get('info') %}
+                        <div class="flashback">
+                            <p style="color: red">{{ msg }}</p>
+                        </div>
+                    {% endfor %}
+
                     <span class="login100-form-title p-b-34 p-t-27">
 						Send Message
 					</span>
 
                     <div class="wrap-input100 validate-input">
-                        <input class="input100" type="number" name="message[recipient][username]" value="{{ recipient.username }}" readonly="readonly">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        <input class="input100" type="text" name="message[recipient][username]" value="{{ recipient.username }}" readonly="readonly">
+                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input">

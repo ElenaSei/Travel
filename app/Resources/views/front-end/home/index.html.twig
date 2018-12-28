@@ -12,7 +12,7 @@
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
                     {% for msg in app.session.flashbag.get('info') %}
-                        <div style="text-align: center; padding-bottom: 24px">
+                        <div class="flashback">
                             <p style="color: green">{{ msg }}</p>
                         </div>
                     {% endfor %}
@@ -38,11 +38,11 @@
                     {#<input type="hidden" name="endDate" id="endDate">#}
 
                     <div class="wrap-input100 validate-input">
-                        {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form'} }) }}
+                        {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'input100'} }) }}
                     </div>
 
                     <div class="wrap-input100 validate-input">
-                        {{ form_widget(form.endDate, { 'attr':{'id': 'endDate_form', 'class': 'form-control'} }) }}
+                        {{ form_widget(form.endDate, { 'attr':{'id': 'endDate_form', 'class': 'input100'} }) }}
                     </div>
 
                     <div class="container-login100-form-btn">
@@ -55,11 +55,11 @@
         </div>
     </div>
 {% endblock %}
-{#{% block javascripts %}#}
-    {#{{ parent() }}#}
-    {#<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>#}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 
-    {#<script>#}
+    <script>
 
         {#$(function() {#}
             {#$('input[name="daterange"]').daterangepicker({#}
@@ -72,11 +72,11 @@
 
 
 
-        {#// jQuery(document).ready(function() {#}
-        {#//     $('.js-datepicker').datepicker();#}
-        {#// });#}
-    {#</script>#}
-{#{% endblock %}#}
+         jQuery(document).ready(function() {
+             $('.js-datepicker').datepicker();
+         });
+    </script>
+{% endblock %}
 
 
 

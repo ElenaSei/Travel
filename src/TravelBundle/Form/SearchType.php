@@ -58,13 +58,9 @@ class SearchType extends AbstractType
                 )
             )
             ->add('endDate', DateType::class, array(
-                'widget' => 'choice',
-//                'placeholder' => array(
-//                    'year' => 'Year',
-//                    'month' => 'Month',
-//                    'day' => 'Day'
-//                ),
-                'required' => true
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker'],
+
             ))
         ;
     }/**

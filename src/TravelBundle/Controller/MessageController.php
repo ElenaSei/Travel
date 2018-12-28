@@ -51,10 +51,15 @@ class MessageController extends Controller
          */
 
         $recipient = $this->userService->findOne($recipientId);
+        $currentUser = $this->getUser();
+
+        if($recipient === $currentUser){
+            $this->addFlash('info', 'You cannot contact yourself!');
+
+            return $this->render('front-end/message/send.html.twig', ['form' => $form->createView(), 'recipient' => $recipient]);
+        }
 
         if ($form->isSubmitted()){
-            $currentUser = $this->getUser();
-
             /**
              * @var User $sender;
              */
