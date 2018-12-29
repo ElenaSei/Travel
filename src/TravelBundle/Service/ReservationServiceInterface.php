@@ -8,21 +8,19 @@
 
 namespace TravelBundle\Service;
 
-
-use Doctrine\Common\Collections\ArrayCollection;
 use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Reservation;
 use TravelBundle\Entity\User;
 
 interface ReservationServiceInterface
 {
-    public function findRecentByPlace(Place $place): ArrayCollection;
+    public function findRecentByPlace(Place $place): array;
 
-    public function findPastByPlace(Place $place): ArrayCollection;
+    public function findPastByPlace(Place $place): array;
 
-    public function findRecentByRenter(User $user): ArrayCollection;
+    public function findRecentByRenter(User $user): array;
 
-    public function findPastByRenter(User $user): ArrayCollection;
+    public function findPastByRenter(User $user): array;
 
     public function save(Reservation $reservation): bool;
 }

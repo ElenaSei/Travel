@@ -1,6 +1,9 @@
 <?php
 
 namespace TravelBundle\Repository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use TravelBundle\Entity\Role;
 
 /**
  * RoleRepository
@@ -10,4 +13,12 @@ namespace TravelBundle\Repository;
  */
 class RoleRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * MessageRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Role::class));
+    }
 }

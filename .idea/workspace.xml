@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2499d7f-8c3a-4a67-9754-e97bf0a8bf68" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Controller/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Controller/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Controller/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Controller/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Controller/PlaceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Controller/PlaceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Repository/AddressRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Repository/AddressRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Repository/PlaceRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Repository/PlaceRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Repository/ReservationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Repository/ReservationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Repository/SearchRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Repository/SearchRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Service/UserService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Service/UserService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Service/UserServiceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Service/UserServiceInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Repository/RoleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Repository/RoleRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Service/PlaceService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Service/PlaceService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Service/PlaceServiceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Service/PlaceServiceInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Service/ReservationService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Service/ReservationService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TravelBundle/Service/ReservationServiceInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/TravelBundle/Service/ReservationServiceInterface.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -64,11 +57,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TravelBundle/Controller/UserController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1545">
-              <caret line="115" column="5" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+            <state relative-caret-position="180">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageServiceInterface.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/MessageServiceInterface.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SessionServiceInterface.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/SessionServiceInterface.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlaceController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/TravelBundle/Controller/PlaceController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+              <folding>
+                <element signature="e#43#105#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,7 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/TravelBundle/Form/AddressType.php" />
         <option value="$PROJECT_DIR$/src/TravelBundle/Form/PlaceType.php" />
         <option value="$PROJECT_DIR$/app/Resources/views/message/send.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/place/view.html.twig" />
@@ -148,12 +170,13 @@
         <option value="$PROJECT_DIR$/src/TravelBundle/Service/UserServiceInterface.php" />
         <option value="$PROJECT_DIR$/src/TravelBundle/Service/UserService.php" />
         <option value="$PROJECT_DIR$/src/TravelBundle/Repository/UserRepository.php" />
-        <option value="$PROJECT_DIR$/src/TravelBundle/Service/ReservationServiceInterface.php" />
-        <option value="$PROJECT_DIR$/src/TravelBundle/Service/ReservationService.php" />
         <option value="$PROJECT_DIR$/src/TravelBundle/Repository/ReservationRepository.php" />
+        <option value="$PROJECT_DIR$/src/TravelBundle/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/src/TravelBundle/Repository/RoleRepository.php" />
         <option value="$PROJECT_DIR$/src/TravelBundle/Service/PlaceService.php" />
         <option value="$PROJECT_DIR$/src/TravelBundle/Service/PlaceServiceInterface.php" />
-        <option value="$PROJECT_DIR$/src/TravelBundle/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/src/TravelBundle/Service/ReservationServiceInterface.php" />
+        <option value="$PROJECT_DIR$/src/TravelBundle/Service/ReservationService.php" />
       </list>
     </option>
   </component>
@@ -229,8 +252,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="42" />
-    <option name="y" value="77" />
+    <option name="x" value="66" />
+    <option name="y" value="54" />
     <option name="width" value="1300" />
     <option name="height" value="849" />
   </component>
@@ -420,12 +443,12 @@
       <workItem from="1544962412364" duration="2280000" />
       <workItem from="1545053486199" duration="21502000" />
       <workItem from="1545215076767" duration="11162000" />
-      <workItem from="1545315507563" duration="35562000" />
+      <workItem from="1545315507563" duration="36113000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="270401000" />
+    <option name="totallyTimeSpent" value="270952000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -437,7 +460,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="42" y="77" width="1300" height="849" extended-state="0" />
+    <frame x="416" y="403" width="1300" height="849" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.27901432" />
@@ -474,20 +497,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/message/view.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="70" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Entity/Message.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="79" column="20" selection-start-line="79" selection-start-column="20" selection-end-line="79" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TravelBundle/Form/MessageType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -674,13 +683,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/MessageServiceInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="20" column="1" lean-forward="true" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/doctrine/persistence/lib/Doctrine/Common/Persistence/ObjectRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -699,13 +701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
           <caret line="26" column="5" lean-forward="true" selection-start-line="17" selection-start-column="4" selection-end-line="26" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/RoleServicesInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -729,13 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/AddressServiceInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TravelBundle/Repository/AddressRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="387">
@@ -756,13 +744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/SearchServiceInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/SearchService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -777,13 +758,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Controller/PlaceController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2990">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -821,67 +795,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/UserServiceInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/ReservationServiceInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" column="47" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-          <folding>
-            <element signature="e#124#172#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/TravelBundle/Repository/ReservationRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+        <state relative-caret-position="285">
+          <caret line="24" column="5" selection-start-line="17" selection-start-column="4" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="e#127#167#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/ReservationService.php">
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Repository/RoleRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        <state relative-caret-position="360">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
-            <element signature="e#123#171#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/PlaceServiceInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
-          <folding>
-            <element signature="e#124#172#0#PHP" expanded="true" />
+            <element signature="e#42#82#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/PlaceService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="54" column="24" lean-forward="true" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
+        <state relative-caret-position="179">
+          <caret line="17" column="29" lean-forward="true" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
           <folding>
-            <element signature="e#124#172#0#PHP" expanded="true" />
+            <element signature="e#124#154#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/AddressServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/PlaceServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#125#155#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/ReservationService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33">
+          <caret line="31" column="59" selection-start-line="31" selection-start-column="59" selection-end-line="31" selection-end-column="59" />
+          <folding>
+            <element signature="e#123#171#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/TravelBundle/Controller/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1545">
-          <caret line="115" column="5" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
+        <state relative-caret-position="180">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/ReservationServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#124#154#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/RoleServicesInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="15" column="55" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/SearchServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/MessageServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="18" column="49" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/UserServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Service/SessionServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TravelBundle/Controller/PlaceController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+          <folding>
+            <element signature="e#43#105#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

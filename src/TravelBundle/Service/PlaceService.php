@@ -8,8 +8,6 @@
 
 namespace TravelBundle\Service;
 
-
-use Doctrine\Common\Collections\ArrayCollection;
 use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Search;
 use TravelBundle\Entity\User;
@@ -46,7 +44,7 @@ class PlaceService implements PlaceServiceInterface
         return $this->placeRepository->find($id);
     }
 
-    public function findAllBySearch(Search $search): ArrayCollection
+    public function findAllBySearch(Search $search): array
     {
         return $this->placeRepository->findAllBySearch($search);
     }
@@ -55,7 +53,7 @@ class PlaceService implements PlaceServiceInterface
      * @param User $user
      * @return null|array|Place
      */
-    public function findAllByOwner(User $user): ?ArrayCollection
+    public function findAllByOwner(User $user): ?array
     {
        return $this->placeRepository->findBy(['owner' => $user]);
     }

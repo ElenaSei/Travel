@@ -8,8 +8,6 @@
 
 namespace TravelBundle\Service;
 
-
-use Doctrine\Common\Collections\ArrayCollection;
 use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Search;
 use TravelBundle\Entity\User;
@@ -20,9 +18,9 @@ interface PlaceServiceInterface
 
     public function findOneById(int $id): ?Place;
 
-    public function findAllBySearch(Search $search): ArrayCollection;
+    public function findAllBySearch(Search $search): array;
 
-    public function findAllByOwner(User $user): ?ArrayCollection;
+    public function findAllByOwner(User $user): ?array;
 
     public function save(Place $place): bool;
 

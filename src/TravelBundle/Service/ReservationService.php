@@ -29,16 +29,16 @@ class ReservationService implements ReservationServiceInterface
     }
 
 
-    public function findRecentByPlace(Place $place): ArrayCollection
+    public function findRecentByPlace(Place $place): array
     {
-        $reservation['recent'] = $this->reservationRepository->findRecentByPlace($place);
+        $reservation = $this->reservationRepository->findRecentByPlace($place);
 
         return $reservation;
     }
 
-    public function findPastByPlace(Place $place): ArrayCollection
+    public function findPastByPlace(Place $place): array
     {
-        $reservation['past'] = $this->reservationRepository->findPastByPlace($place);
+        $reservation = $this->reservationRepository->findPastByPlace($place);
 
         return $reservation;
     }
@@ -48,12 +48,12 @@ class ReservationService implements ReservationServiceInterface
         return $this->reservationRepository->save($reservation);
     }
 
-    public function findRecentByRenter(User $user): ArrayCollection
+    public function findRecentByRenter(User $user): array
     {
         return $this->reservationRepository->findRecentByRenter($user);
     }
 
-    public function findPastByRenter(User $user): ArrayCollection
+    public function findPastByRenter(User $user): array
     {
         return $this->reservationRepository->findPastByRenter($user);
     }
