@@ -14,13 +14,13 @@ use TravelBundle\Entity\User;
 
 interface SessionServiceInterface
 {
-    public function findOneByUsersId(User $recipient, User $sender);
+    public function findOneByUsersId(User $recipient, User $sender): ?Session;
 
     public function save(Session $session): bool;
 
     public function update(Session $session): bool;
 
-    public function findOneById(int $id);
+    public function findOneById(int $id): ?Session;
 
-    public function findAllByUser(User $user);
+    public function findAllByUser(User $user): array ;
 }

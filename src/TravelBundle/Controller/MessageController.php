@@ -154,7 +154,7 @@ class MessageController extends Controller
 
         }
 
-        $messages = $this->messageService->findAllFromSession(['session' => $session], ['dateAdded' => 'ASC']);
+        $messages = $this->messageService->findAllFromSession($session, ['dateAdded' => 'ASC']);
 
         $session->setIsRead(true);
 

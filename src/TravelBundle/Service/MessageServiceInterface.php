@@ -9,12 +9,13 @@
 namespace TravelBundle\Service;
 
 use TravelBundle\Entity\Message;
+use TravelBundle\Entity\Session;
 
 interface MessageServiceInterface
 {
-    public function findOnePerSession(array $criteria, array $orderBy = null);
+    public function findOnePerSession(array $sessions, array $orderBy = null): array;
 
-    public function findAllFromSession(array $criteria, array $orderBy = null);
+    public function findAllFromSession(Session $session, array $orderBy = null): array;
 
     public function save(Message $message): bool;
 

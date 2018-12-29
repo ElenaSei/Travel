@@ -97,7 +97,7 @@ class PlaceController extends Controller
 
         $reservations['past'] = $this->reservationService->findPastByPlace($place);
         $reservations['recent'] = $this->reservationService->findRecentByPlace($place);
-        
+
 
         return $this->render('front-end/place/details.html.twig', ['place' => $place, 'reservations' => $reservations]);
     }

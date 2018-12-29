@@ -9,6 +9,7 @@
 namespace TravelBundle\Service;
 
 use TravelBundle\Entity\Message;
+use TravelBundle\Entity\Search;
 use TravelBundle\Entity\Session;
 use TravelBundle\Repository\MessageRepository;
 
@@ -21,7 +22,7 @@ class MessageService implements MessageServiceInterface
         $this->messageRepository = $messageRepository;
     }
 
-    public function findOnePerSession(array $sessions, array $orderBy = null)
+    public function findOnePerSession(array $sessions, array $orderBy = null): array
     {
         $messages = [];
 
@@ -40,8 +41,8 @@ class MessageService implements MessageServiceInterface
         return $this->messageRepository->save($message);
     }
 
-    public function findAllFromSession(array $criteria, array $orderBy = null)
+    public function findAllFromSession(Session $session, array $orderBy = null): array
     {
-        return $this->messageRepository->findBy($criteria, $orderBy);
+        return $this->messageRepository->findBy(['session' => $session], $orderBy);
     }
 }

@@ -26,7 +26,7 @@ class SessionService implements SessionServiceInterface
         $this->sessionRepository = $sessionRepository;
     }
 
-    public function findOneByUsersId(User $recipient, User $sender)
+    public function findOneByUsersId(User $recipient, User $sender): ?Session
     {
        return $this->sessionRepository->findOneByUsersId($recipient, $sender);
     }
@@ -41,12 +41,16 @@ class SessionService implements SessionServiceInterface
         return $this->sessionRepository->update($session);
     }
 
-    public function findOneById(int $id)
+    /**
+     * @param int $id
+     * @return null|object|Session
+     */
+    public function findOneById(int $id): ?Session
     {
         return $this->sessionRepository->find($id);
     }
 
-    public function findAllByUser(User $user)
+    public function findAllByUser(User $user): array
     {
         return $this->sessionRepository->findAllByUser($user);
     }
