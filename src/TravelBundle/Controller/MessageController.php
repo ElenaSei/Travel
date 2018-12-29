@@ -50,7 +50,7 @@ class MessageController extends Controller
          * @var User $recipient;
          */
 
-        $recipient = $this->userService->findOne($recipientId);
+        $recipient = $this->userService->findOneById($recipientId);
         $currentUser = $this->getUser();
 
         if($recipient === $currentUser){
@@ -63,7 +63,7 @@ class MessageController extends Controller
             /**
              * @var User $sender;
              */
-            $sender = $this->userService->findOne($currentUser);
+            $sender = $this->userService->findOneByUser($currentUser);
 
             $message->setRecipient($recipient);
             $message->setSender($sender);
@@ -106,7 +106,7 @@ class MessageController extends Controller
     public function allAction(){
         $currentUser = $this->getUser();
 
-        $user = $this->userService->findOne($currentUser);
+        $user = $this->userService->findOneByUser($currentUser);
 
         $sessions = $this->sessionService->findAllByUser($user);
 

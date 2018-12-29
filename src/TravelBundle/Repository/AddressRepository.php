@@ -1,6 +1,9 @@
 <?php
 
 namespace TravelBundle\Repository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use TravelBundle\Entity\Address;
 
 /**
  * AddressRepository
@@ -10,4 +13,26 @@ namespace TravelBundle\Repository;
  */
 class AddressRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * MessageRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Address::class));
+    }
+
+    public function save(Address $address){
+
+        try{
+            $this->_em->persist($address);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+
+    }
 }

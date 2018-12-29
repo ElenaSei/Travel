@@ -7,11 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use TravelBundle\Entity\Search;
-use TravelBundle\Entity\User;
 use TravelBundle\Form\SearchType;
+use TravelBundle\Service\SearchServiceInterface;
+use TravelBundle\Service\UserServiceInterface;
 
 class HomeController extends Controller
 {
+    private $userService;
+    private $searchService;
+
+    public function __construct(UserServiceInterface $userService, SearchServiceInterface $searchService)
+    {
+        $this->userService = $userService;
+        $this->searchService = $searchService;
+    }
+
     /**
      * @Route("/", name="homepage")
      * @param Request $request
@@ -26,21 +36,18 @@ class HomeController extends Controller
 
         if ($form->isSubmitted()) {
 
-            $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser());
+            $currentUser = $this->userService->findOneByUser($this->getUser());
 
             if ($currentUser->getSearch() === null){
                 $currentUser->setSearch($search);
                 $search->setUser($currentUser);
             }else{
-                $search = $this->getDoctrine()->getRepository(Search::class)->findOneBy(['user' => $currentUser]);
+                $search = $this->searchService->findOneByUser($currentUser);
                 $form = $this->createForm(SearchType::class, $search);
                 $form->handleRequest($request);
             }
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($search);
-            $em->flush();
-
+            $this->searchService->save($search);
 
             return $this->redirectToRoute('place_all', ['searchId' => $search->getId()]);
         }

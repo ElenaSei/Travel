@@ -1,7 +1,9 @@
 <?php
 
 namespace TravelBundle\Repository;
-use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Search;
 
 /**
@@ -12,7 +14,16 @@ use TravelBundle\Entity\Search;
  */
 class PlaceRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAllBy(Search $search){
+    /**
+     * MessageRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Place::class));
+    }
+
+    public function findAllBySearch(Search $search){
         return $this->createQueryBuilder('place')
             ->innerJoin('place.address', 'address')
             ->where('address.country = :country')
@@ -33,4 +44,43 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function save(Place $place){
+
+        try{
+            $this->_em->persist($place);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+
+    }
+
+    public function update(Place $place){
+        try{
+            $this->_em->merge($place);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+    }
+
+    public function delete(Place $place){
+        try{
+            $this->_em->remove($place);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+    }
+
 }

@@ -1,6 +1,9 @@
 <?php
 
 namespace TravelBundle\Repository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use TravelBundle\Entity\Search;
 
 /**
  * SearchRepository
@@ -10,4 +13,26 @@ namespace TravelBundle\Repository;
  */
 class SearchRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+     * MessageRepository constructor.
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct($em, new ClassMetadata(Search::class));
+    }
+    public function save(Search $search){
+
+        try{
+            $this->_em->persist($search);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+
+    }
 }
