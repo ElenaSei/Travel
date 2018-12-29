@@ -11,9 +11,36 @@ use TravelBundle\Entity\Reservation;
 use TravelBundle\Entity\Role;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\UserType;
+use TravelBundle\Service\PlaceServiceInterface;
+use TravelBundle\Service\ReservationServiceInterface;
+use TravelBundle\Service\RoleServicesInterface;
+use TravelBundle\Service\UserServiceInterface;
 
 class UserController extends Controller
 {
+    private $userService;
+    private $roleService;
+    private $reservationService;
+    private $placeService;
+
+    /**
+     * UserController constructor.
+     * @param UserServiceInterface $userService
+     * @param RoleServicesInterface $roleServices
+     * @param ReservationServiceInterface $reservationService
+     * @param PlaceServiceInterface $placeService
+     */
+    public function __construct(UserServiceInterface $userService,
+                                RoleServicesInterface $roleServices,
+                                ReservationServiceInterface $reservationService,
+                                PlaceServiceInterface $placeService)
+    {
+        $this->userService = $userService;
+        $this->roleService = $roleServices;
+        $this->reservationService = $reservationService;
+        $this->placeService = $placeService;
+    }
+
     /**
      * @Route("/register", name="user_register")
      * @param Request $request
@@ -25,16 +52,13 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-
-
         if ($form->isSubmitted()){
 
-
-            if ($this->getDoctrine()->getRepository(User::class)->findOneBy(['username' => $user->getUsername()])){
+            if ($this->userService->findOneByUsername($user->getUsername())){
                 $this->addFlash('info','Username is taken!');
                 return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
-            if ($this->getDoctrine()->getRepository(User::class)->findOneBy(['email' => $user->getEmail()])){
+            if ($this->userService->findOneByEmail($user->getEmail())){
                 $this->addFlash('info','Email is taken!');
                 return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
@@ -44,24 +68,16 @@ class UserController extends Controller
                 return $this->render('front-end/home/register.html.twig', ['form' => $form->createView()]);
             }
 
-
-            $password = $this->get('security.password_encoder')
+            $password = $this
+                ->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);
 
-            $role = $this
-                ->getDoctrine()
-                ->getRepository(Role::class)
-                ->findOneBy(['name' => 'ROLE_RENTER']);
-
+            $role = $this->roleService->findOneByName('ROLE_RENTER');
             $user->addRole($role);
 
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
+            $this->userService->save($user);
 
             return $this->redirectToRoute('security_login');
         }
@@ -76,8 +92,8 @@ class UserController extends Controller
     public function userTrips(){
         $currentUser = $this->getUser();
 
-        $trips['past'] = $this->getDoctrine()->getRepository(Reservation::class)->findPastByUser(['renter' => $currentUser]);
-        $trips['recent'] = $this->getDoctrine()->getRepository(Reservation::class)->findRecentByUser(['renter' => $currentUser]);
+        $trips['past'] = $this->reservationService->findPastByRenter($currentUser);
+        $trips['recent'] = $this->reservationService->findRecentByRenter($currentUser);
 
         if (empty($trips)){
             $this->addFlash('info', 'You don`t have any trips yet');
@@ -94,24 +110,8 @@ class UserController extends Controller
      */
     public function userPlaces(){
         $currentUser = $this->getUser();
-        $places = $this->getDoctrine()->getRepository(Place::class)->findBy(['owner' => $currentUser]);
+        $places = $this->placeService->findAllByOwner($currentUser);
 
         return $this->render('front-end/user/places.html.twig', ['places' => $places]);
     }
-
-    /**
-     * @Route("/reservation/{id}", name="user_reservation")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function reservation($id){
-        $place = $this->getDoctrine()->getRepository(Place::class)->findOneBy(['id' => $id]);
-        $reservation = $this->getDoctrine()->getRepository(Reservation::class)->findOneBy(['place' => $place]);
-
-
-        return $this->render('user/reservation.html.twig', ['reservation' => $reservation]);
-    }
-
-
 }

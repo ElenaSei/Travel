@@ -21,4 +21,18 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
     {
         parent::__construct($em, new ClassMetadata(User::class));
     }
+
+    public function save(User $user){
+
+        try{
+            $this->_em->persist($user);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
+
+    }
 }
