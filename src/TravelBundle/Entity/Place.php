@@ -37,13 +37,6 @@ class Place
      */
     private $description;
 
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="address", type="string", length=255)
-//     */
-//    private $address;
-
     /**
      * @var int
      *
@@ -75,10 +68,10 @@ class Place
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="TravelBundle\Entity\Reservation", mappedBy="place")
+     * @ORM\OneToMany(targetEntity="TravelBundle\Entity\Booking", mappedBy="place")
      *
      */
-    private $reservations;
+    private $bookings;
 
     /**
      * @var integer
@@ -106,7 +99,7 @@ class Place
      */
     public function __construct()
     {
-        $this->reservations = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
         $this->capacity = 1;
     }
 
@@ -164,18 +157,18 @@ class Place
     /**
      * @return ArrayCollection
      */
-    public function getReservations()
+    public function getBookings()
     {
-        return $this->reservations;
+        return $this->bookings;
     }
 
     /**
-     * @param Reservation $reservation
+     * @param Booking $reservation
      * @return Place
      */
-    public function setReservations(Reservation $reservation)
+    public function setBookings(Booking $reservation)
     {
-        $this->reservations[] = $reservation;
+        $this->bookings[] = $reservation;
 
         return $this;
     }

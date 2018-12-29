@@ -35,12 +35,12 @@
         </section>
     </article>
 
-    <section class="reservations">
-        <section class="reservationInfo">
+    <section class="bookings">
+        <section class="bookingInfo">
             <h3>
-                Recent Reservations
+                Recent Bookings
             </h3>
-            {% if reservations.recent is empty %}
+            {% if bookings.recent is empty %}
             <p>The place isn't booked yet.</p>
             {% else %}
             <table border="1px">
@@ -58,21 +58,21 @@
                         Renter
                     </th>
                 </tr>
-                {% for reservation in reservations.recent %}
+                {% for booking in bookings.recent %}
                     <tr>
                         <td>
-                            {{ reservation.startDate|date('d M Y') }}
+                            {{ booking.startDate|date('d M Y') }}
                         </td>
                         <td>
-                            {{ reservation.endDate|date('d M Y') }}
+                            {{ booking.endDate|date('d M Y') }}
                         </td>
                         <td>
-                            {{ reservation.totalMoney }}$
+                            {{ booking.totalMoney }}$
                         </td>
 
                         <td>
-                            <a href="{{ path('send_message', {'recipientId': reservation.renter.id}) }}">
-                            {{ reservation.renter.username }}
+                            <a href="{{ path('send_message', {'recipientId': booking.renter.id}) }}">
+                            {{ booking.renter.username }}
                             </a>
                         </td>
                     </tr>
@@ -80,11 +80,11 @@
             </table>
             {% endif %}
                 </section>
-                <section class="reservationInfo">
+                <section class="bookingInfo">
                     <h3>
-                        Past Reservations
+                        Past Bookings
                     </h3>
-    {% if reservations.past is empty %}
+    {% if bookings.past is empty %}
         <p>No past bookings.</p>
     {% else %}
         <table border="1px">
@@ -102,21 +102,21 @@
                     Renter
                 </th>
             </tr>
-            {% for reservation in reservations.past %}
+            {% for booking in bookings.past %}
                 <tr>
                     <td>
-                        {{ reservation.startDate|date('d M Y') }}
+                        {{ booking.startDate|date('d M Y') }}
                     </td>
                     <td>
-                        {{ reservation.endDate|date('d M Y') }}
+                        {{ booking.endDate|date('d M Y') }}
                     </td>
                     <td>
-                        {{ reservation.totalMoney }}$
+                        {{ booking.totalMoney }}$
                     </td>
 
                     <td>
-                        <a href="{{ path('send_message', {'recipientId': reservation.renter.id}) }}">
-                            {{ reservation.renter.username }}
+                        <a href="{{ path('send_message', {'recipientId': booking.renter.id}) }}">
+                            {{ booking.renter.username }}
                         </a>
                     </td>
                 </tr>

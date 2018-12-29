@@ -9,10 +9,10 @@
 namespace TravelBundle\Service;
 
 use TravelBundle\Entity\Place;
-use TravelBundle\Entity\Reservation;
+use TravelBundle\Entity\Booking;
 use TravelBundle\Entity\User;
 
-interface ReservationServiceInterface
+interface BookingServiceInterface
 {
     public function findRecentByPlace(Place $place): array;
 
@@ -22,5 +22,5 @@ interface ReservationServiceInterface
 
     public function findPastByRenter(User $user): array;
 
-    public function save(Reservation $reservation): bool;
+    public function save(Booking $reservation): bool;
 }

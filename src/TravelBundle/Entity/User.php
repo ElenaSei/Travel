@@ -54,10 +54,10 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="TravelBundle\Entity\Reservation", mappedBy="renter")
+     * @ORM\OneToMany(targetEntity="TravelBundle\Entity\Booking", mappedBy="renter")
      *
      */
-    private $reservations;
+    private $bookings;
 
     /**
      * @var ArrayCollection
@@ -109,7 +109,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->places = new ArrayCollection();
-        $this->reservations = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->sendMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
@@ -199,19 +199,19 @@ class User implements UserInterface
     /**
      * @return ArrayCollection
      */
-    public function getReservations()
+    public function getBookings()
     {
-        return $this->reservations;
+        return $this->bookings;
     }
 
     /**
-     * @param ArrayCollection $reservations
+     * @param ArrayCollection $bookings
      *
      * @return User
      */
-    public function setReservations($reservations)
+    public function setBookings($bookings)
     {
-        $this->reservations = $reservations;
+        $this->bookings = $bookings;
 
         return $this;
     }

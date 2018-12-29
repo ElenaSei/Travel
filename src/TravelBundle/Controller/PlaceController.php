@@ -7,12 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use TravelBundle\Entity\Place;
-use TravelBundle\Entity\Reservation;
+use TravelBundle\Entity\Booking;
 use TravelBundle\Form\PlaceType;
-use TravelBundle\Form\ReservationType;
+use TravelBundle\Form\BookingType;
 use TravelBundle\Service\AddressServiceInterface;
 use TravelBundle\Service\PlaceServiceInterface;
-use TravelBundle\Service\ReservationServiceInterface;
+use TravelBundle\Service\BookingServiceInterface;
 use TravelBundle\Service\RoleServicesInterface;
 use TravelBundle\Service\SearchServiceInterface;
 use TravelBundle\Service\UserServiceInterface;
@@ -24,21 +24,21 @@ class PlaceController extends Controller
     private $searchService;
     private $roleService;
     private $addressService;
-    private $reservationService;
+    private $bookingService;
 
     public function __construct(UserServiceInterface $userService,
                                 PlaceServiceInterface $placeService,
                                 RoleServicesInterface $roleServices,
                                 SearchServiceInterface $searchService,
                                 AddressServiceInterface $addressService,
-                                ReservationServiceInterface $reservationService)
+                                BookingServiceInterface $bookingService)
     {
         $this->userService = $userService;
         $this->placeService = $placeService;
         $this->searchService = $searchService;
         $this->roleService = $roleServices;
         $this->addressService = $addressService;
-        $this->reservationService = $reservationService;
+        $this->bookingService = $bookingService;
     }
 
     /**
@@ -95,11 +95,11 @@ class PlaceController extends Controller
             throw new \Exception('Undefined place');
         }
 
-        $reservations['past'] = $this->reservationService->findPastByPlace($place);
-        $reservations['recent'] = $this->reservationService->findRecentByPlace($place);
+        $bookings['past'] = $this->bookingService->findPastByPlace($place);
+        $bookings['recent'] = $this->bookingService->findRecentByPlace($place);
 
 
-        return $this->render('front-end/place/details.html.twig', ['place' => $place, 'reservations' => $reservations]);
+        return $this->render('front-end/place/details.html.twig', ['place' => $place, 'bookings' => $bookings]);
     }
 
     /**
@@ -117,7 +117,7 @@ class PlaceController extends Controller
         $form = $this->createForm(PlaceType::class, $place);
         $form->handleRequest($request);
 
-        $reservations = $this->reservationService->findRecentByPlace($place);
+        $bookings = $this->bookingService->findRecentByPlace($place);
 
         if ($place === null){
             $this->addFlash('info','Undefined place');
@@ -125,7 +125,7 @@ class PlaceController extends Controller
         }elseif ($place->getOwner() !== $this->getUser()){
             $this->addFlash('info', 'You are not owner of this place!');
 
-        }elseif (!empty($reservations)){
+        }elseif (!empty($bookings)){
             $this->addFlash('info', 'This place has been booked. You cannot edit it.');
 
         }elseif ($form->isSubmitted()){
@@ -153,9 +153,9 @@ class PlaceController extends Controller
     public function deleteAction($id){
         $place = $this->placeService->findOneById($id);
 
-        $reservations = $this->reservationService->findRecentByPlace($place);
+        $bookings = $this->bookingService->findRecentByPlace($place);
 
-        if (!empty($reservations)){
+        if (!empty($bookings)){
             $this->addFlash('info', 'The place is booked. You cannot deleted it.');
 
             return $this->redirectToRoute('place_details', ['id' => $id]);
@@ -195,9 +195,9 @@ class PlaceController extends Controller
         $place = $this->placeService->findOneById($id);
         $search = $this->searchService->findOneById($searchId);
 
-        $reservation = new Reservation();
+        $reservation = new Booking();
 
-        $form = $this->createForm(ReservationType::class, $reservation);
+        $form = $this->createForm(BookingType::class, $reservation);
         $form->handleRequest($request);
 
         if (isset($request) && $request->isMethod('post')){
@@ -215,7 +215,7 @@ class PlaceController extends Controller
             $totalPrice = str_replace('$', '', $request->request->get('totalPrice'));
             $reservation->setTotalMoney($totalPrice);
 
-            $this->reservationService->save($reservation);
+            $this->bookingService->save($reservation);
 
             $this->addFlash('info', 'Have a nice a trip!');
             return $this->redirectToRoute('homepage');

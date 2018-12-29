@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ReservationType extends AbstractType
+class BookingType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,7 @@ class ReservationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'TravelBundle\Entity\Reservation'
+            'data_class' => 'Booking'
         ));
     }
 

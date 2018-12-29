@@ -11,9 +11,9 @@ namespace TravelBundle\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use TravelBundle\Entity\Reservation;
+use TravelBundle\Entity\Booking;
 
-class ReservationRepository extends \Doctrine\ORM\EntityRepository
+class BookingRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
      * MessageRepository constructor.
@@ -21,7 +21,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
      */
     public function __construct(EntityManagerInterface $em)
     {
-        parent::__construct($em, new ClassMetadata(Reservation::class));
+        parent::__construct($em, new ClassMetadata(Booking::class));
     }
 
      public function findPastByPlace($place){
@@ -62,7 +62,7 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function save(Reservation $reservation){
+    public function save(Booking $reservation){
 
         try{
             $this->_em->persist($reservation);

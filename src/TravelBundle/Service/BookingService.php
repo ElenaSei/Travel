@@ -10,20 +10,20 @@ namespace TravelBundle\Service;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use TravelBundle\Entity\Place;
-use TravelBundle\Entity\Reservation;
+use TravelBundle\Entity\Booking;
 use TravelBundle\Entity\User;
-use TravelBundle\Repository\ReservationRepository;
+use TravelBundle\Repository\BookingRepository;
 
-class ReservationService implements ReservationServiceInterface
+class BookingService implements BookingServiceInterface
 {
 
     private $reservationRepository;
 
     /**
-     * ReservationService constructor.
+     * BookingService constructor.
      * @param $reservationRepository
      */
-    public function __construct(ReservationRepository $reservationRepository)
+    public function __construct(BookingRepository $reservationRepository)
     {
         $this->reservationRepository = $reservationRepository;
     }
@@ -43,7 +43,7 @@ class ReservationService implements ReservationServiceInterface
         return $reservation;
     }
 
-    public function save(Reservation $reservation): bool
+    public function save(Booking $reservation): bool
     {
         return $this->reservationRepository->save($reservation);
     }

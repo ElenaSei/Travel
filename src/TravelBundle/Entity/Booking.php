@@ -5,12 +5,12 @@ namespace TravelBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ReservationRepository
+ * BookingRepository
  *
- * @ORM\Table(name="reservation")
- * @ORM\Entity(repositoryClass="TravelBundle\Repository\ReservationRepository")
+ * @ORM\Table(name="bookings")
+ * @ORM\Entity(repositoryClass="TravelBundle\Repository\BookingRepository")
  */
-class Reservation
+class Booking
 {
     /**
      * @var int
@@ -39,14 +39,14 @@ class Reservation
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\User", inversedBy="reservations")
+     * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\User", inversedBy="bookings")
      */
     private $renter;
 
     /**
      * @var Place
      *
-     * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\Place", inversedBy="reservations")
+     * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\Place", inversedBy="bookings")
      */
     private $place;
 
@@ -84,7 +84,7 @@ class Reservation
     /**
      * @param User $user
      *
-     * @return Reservation
+     * @return Booking
      */
     public function setRenter($user)
     {
@@ -104,7 +104,7 @@ class Reservation
     /**
      * @param Place $place
      *
-     * @return Reservation
+     * @return Booking
      */
     public function setPlace($place)
     {
@@ -128,7 +128,7 @@ class Reservation
      *
      * @param \DateTime $startDate
      *
-     * @return Reservation
+     * @return Booking
      */
     public function setStartDate($startDate = null)
     {
@@ -152,7 +152,7 @@ class Reservation
      *
      * @param \DateTime $endDate
      *
-     * @return Reservation
+     * @return Booking
      */
     public function setEndDate($endDate = null)
     {

@@ -7,12 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use TravelBundle\Entity\Place;
-use TravelBundle\Entity\Reservation;
+use TravelBundle\Entity\Booking;
 use TravelBundle\Entity\Role;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\UserType;
 use TravelBundle\Service\PlaceServiceInterface;
-use TravelBundle\Service\ReservationServiceInterface;
+use TravelBundle\Service\BookingServiceInterface;
 use TravelBundle\Service\RoleServicesInterface;
 use TravelBundle\Service\UserServiceInterface;
 
@@ -20,24 +20,24 @@ class UserController extends Controller
 {
     private $userService;
     private $roleService;
-    private $reservationService;
+    private $bookingService;
     private $placeService;
 
     /**
      * UserController constructor.
      * @param UserServiceInterface $userService
      * @param RoleServicesInterface $roleServices
-     * @param ReservationServiceInterface $reservationService
+     * @param BookingServiceInterface $bookingService
      * @param PlaceServiceInterface $placeService
      */
     public function __construct(UserServiceInterface $userService,
                                 RoleServicesInterface $roleServices,
-                                ReservationServiceInterface $reservationService,
+                                BookingServiceInterface $bookingService,
                                 PlaceServiceInterface $placeService)
     {
         $this->userService = $userService;
         $this->roleService = $roleServices;
-        $this->reservationService = $reservationService;
+        $this->bookingService = $bookingService;
         $this->placeService = $placeService;
     }
 
@@ -92,8 +92,8 @@ class UserController extends Controller
     public function userTrips(){
         $currentUser = $this->getUser();
 
-        $trips['past'] = $this->reservationService->findPastByRenter($currentUser);
-        $trips['recent'] = $this->reservationService->findRecentByRenter($currentUser);
+        $trips['past'] = $this->bookingService->findPastByRenter($currentUser);
+        $trips['recent'] = $this->bookingService->findRecentByRenter($currentUser);
 
         if (empty($trips)){
             $this->addFlash('info', 'You don`t have any trips yet');

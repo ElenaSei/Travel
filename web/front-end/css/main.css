@@ -806,7 +806,7 @@ footer{
     color:black;
 }
 
-.reservations {
+.bookings {
     padding: 15px;
     display: flex;
     width: 80%;
@@ -815,27 +815,27 @@ footer{
     justify-content: space-between;
 }
 
-.reservationInfo{
+.bookingInfo{
     width: 47%;
     background: rgba(255, 255, 255, 0.7);
     border-radius: 10px;
     padding: 15px;
 }
 
-.reservationInfo h3{
+.bookingInfo h3{
     text-align: center;
     font-size: 20px;
     color: #2f2f2f;
 }
 
-.reservationInfo table{
+.bookingInfo table{
     margin-left: auto;
     margin-right: auto;
     margin-top: 15px;
     text-align: center;
 }
 
-.reservationInfo p{
+.bookingInfo p{
     text-align: center;
     font-size: 14px;
     color: #666;
