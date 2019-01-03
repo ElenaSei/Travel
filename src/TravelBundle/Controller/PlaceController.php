@@ -6,11 +6,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use TravelBundle\Entity\Notification;
 use TravelBundle\Entity\Place;
 use TravelBundle\Entity\Booking;
 use TravelBundle\Form\PlaceType;
 use TravelBundle\Form\BookingType;
 use TravelBundle\Service\AddressServiceInterface;
+use TravelBundle\Service\NotificationServiceInterface;
 use TravelBundle\Service\PlaceServiceInterface;
 use TravelBundle\Service\BookingServiceInterface;
 use TravelBundle\Service\RoleServicesInterface;
@@ -25,13 +27,15 @@ class PlaceController extends Controller
     private $roleService;
     private $addressService;
     private $bookingService;
+    private $notificationService;
 
     public function __construct(UserServiceInterface $userService,
                                 PlaceServiceInterface $placeService,
                                 RoleServicesInterface $roleServices,
                                 SearchServiceInterface $searchService,
                                 AddressServiceInterface $addressService,
-                                BookingServiceInterface $bookingService)
+                                BookingServiceInterface $bookingService,
+                                NotificationServiceInterface $notificationService)
     {
         $this->userService = $userService;
         $this->placeService = $placeService;
@@ -39,6 +43,7 @@ class PlaceController extends Controller
         $this->roleService = $roleServices;
         $this->addressService = $addressService;
         $this->bookingService = $bookingService;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -195,9 +200,9 @@ class PlaceController extends Controller
         $place = $this->placeService->findOneById($id);
         $search = $this->searchService->findOneById($searchId);
 
-        $reservation = new Booking();
+        $booking = new Booking();
 
-        $form = $this->createForm(BookingType::class, $reservation);
+        $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
         if (isset($request) && $request->isMethod('post')){
@@ -207,15 +212,21 @@ class PlaceController extends Controller
             $endDate = $search->getEndDate();
 
 
-            $reservation->setRenter($currentUser);
-            $reservation->setPlace($place);
-            $reservation->setStartDate($startDate);
-            $reservation->setEndDate($endDate);
+            $booking->setRenter($currentUser);
+            $booking->setPlace($place);
+            $booking->setStartDate($startDate);
+            $booking->setEndDate($endDate);
 
             $totalPrice = str_replace('$', '', $request->request->get('totalPrice'));
-            $reservation->setTotalMoney($totalPrice);
+            $booking->setTotalMoney($totalPrice);
 
-            $this->bookingService->save($reservation);
+            $notification = new Notification();
+            $notification->setContent('Your place was booked!');
+            $notification->setBooking($booking);
+
+            $this->notificationService->add($notification);
+
+            $this->bookingService->save($booking);
 
             $this->addFlash('info', 'Have a nice a trip!');
             return $this->redirectToRoute('homepage');

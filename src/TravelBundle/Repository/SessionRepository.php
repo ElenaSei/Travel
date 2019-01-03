@@ -41,6 +41,15 @@ class SessionRepository extends \Doctrine\ORM\EntityRepository
             ->getOneOrNullResult();
     }
 
+    public function findUnread($user){
+        return $this->createQueryBuilder('session')
+            ->where(':user MEMBER OF session.users')
+            ->andWhere('session.isRead = false')
+            ->setParameter(':user', $user)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function save(Session $message){
 
         try{

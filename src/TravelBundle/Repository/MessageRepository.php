@@ -4,6 +4,8 @@ namespace TravelBundle\Repository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use TravelBundle\Entity\Message;
+use TravelBundle\Entity\Session;
+use TravelBundle\Entity\User;
 
 /**
  * MessageRepository
@@ -21,6 +23,14 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
     public function __construct(EntityManagerInterface $em)
     {
         parent::__construct($em, new ClassMetadata(Message::class));
+    }
+
+    public function findOneBySessionAndRecipient(Session $session, User $user){
+        return $this->createQueryBuilder('message')
+            ->where('message.recipient = :user AND message.session = :session')
+            ->setParameters(['user' => $user, 'session' => $session])
+            ->getQuery()
+            ->getResult();
     }
 
     public function save(Message $message){

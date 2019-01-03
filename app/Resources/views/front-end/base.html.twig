@@ -54,9 +54,9 @@
                                 </a>
                             </li>
                         {% endif %}
-                        <li><a href="{{ path('user_trips') }}">My trips</a></li>
-                        <li><a href="{{ path('user_mailbox') }}">Messages</a></li>
-                        <li><a href="{{ path('security_logout') }}">Logout</a></li>
+                            <li><a href="{{ path('user_trips') }}">My trips</a></li>
+                            <li>{{ render(controller('TravelBundle:Notifications:notificationCount')) }}</li>
+                            <li><a href="{{ path('security_logout') }}">Logout</a></li>
                         {% else %}
                         <li>
                             <a href="{{ path('user_register') }}">

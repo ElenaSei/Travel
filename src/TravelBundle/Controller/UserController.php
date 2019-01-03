@@ -11,6 +11,7 @@ use TravelBundle\Entity\Booking;
 use TravelBundle\Entity\Role;
 use TravelBundle\Entity\User;
 use TravelBundle\Form\UserType;
+use TravelBundle\Service\NotificationServiceInterface;
 use TravelBundle\Service\PlaceServiceInterface;
 use TravelBundle\Service\BookingServiceInterface;
 use TravelBundle\Service\RoleServicesInterface;
@@ -22,6 +23,7 @@ class UserController extends Controller
     private $roleService;
     private $bookingService;
     private $placeService;
+    private $notificationService;
 
     /**
      * UserController constructor.
@@ -29,16 +31,19 @@ class UserController extends Controller
      * @param RoleServicesInterface $roleServices
      * @param BookingServiceInterface $bookingService
      * @param PlaceServiceInterface $placeService
+     * @param NotificationServiceInterface $notificationService
      */
     public function __construct(UserServiceInterface $userService,
                                 RoleServicesInterface $roleServices,
                                 BookingServiceInterface $bookingService,
-                                PlaceServiceInterface $placeService)
+                                PlaceServiceInterface $placeService,
+                                NotificationServiceInterface $notificationService)
     {
         $this->userService = $userService;
         $this->roleService = $roleServices;
         $this->bookingService = $bookingService;
         $this->placeService = $placeService;
+        $this->notificationService = $notificationService;
     }
 
     /**
@@ -89,7 +94,7 @@ class UserController extends Controller
      * @Route("/userTrips", name="user_trips")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function userTrips(){
+    public function tripsAction(){
         $currentUser = $this->getUser();
 
         $trips['past'] = $this->bookingService->findPastByRenter($currentUser);
@@ -108,7 +113,7 @@ class UserController extends Controller
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function userPlaces(){
+    public function placesAction(){
         $currentUser = $this->getUser();
         $places = $this->placeService->findAllByOwner($currentUser);
 

@@ -75,8 +75,6 @@ class MessageController extends Controller
                 $session = new Session();
                 $session->addUsers($recipient)->addUsers($sender);
 
-                $session->setIsRead(false);
-
                 $this->sessionService->save($session);
 
                 $sender->addSessions($session);
@@ -135,11 +133,14 @@ class MessageController extends Controller
             return $this->redirectToRoute('user_mailbox');
         }
 
+        $session->setIsRead(true);
+
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()){
+            $session->setIsRead(false);
             $message->setSession($session);
             $message->setSender($this->getUser());
 
@@ -156,7 +157,6 @@ class MessageController extends Controller
 
         $messages = $this->messageService->findAllFromSession($session, ['dateAdded' => 'ASC']);
 
-        $session->setIsRead(true);
 
         if (!$this->sessionService->update($session)){
             $this->addFlash('info', 'Session could not be update!');

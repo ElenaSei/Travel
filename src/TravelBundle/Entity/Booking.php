@@ -3,9 +3,10 @@
 namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * BookingRepository
+ * Booking
  *
  * @ORM\Table(name="bookings")
  * @ORM\Entity(repositoryClass="TravelBundle\Repository\BookingRepository")
@@ -56,6 +57,42 @@ class Booking
      * @ORM\Column(name="total_money", type="decimal", nullable=false)
      */
     private $totalMoney;
+
+    /**
+     * @var Notification
+     *
+     * @ORM\OneToMany(targetEntity="TravelBundle\Entity\Notification", mappedBy="booking")
+     */
+    private $notifications;
+
+    /**
+     * Booking constructor.
+     */
+    public function __construct()
+    {
+        $this->notifications = new ArrayCollection();
+    }
+
+    /**
+     * @return Notification
+     */
+    public function getNotifications(): Notification
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * @param Notification $notification
+     * @return Booking
+     */
+    public function addNotifications(Notification $notification)
+    {
+        $this->notifications[] = $notification;
+
+        return $this;
+    }
+
+
 
     /**
      * @return float

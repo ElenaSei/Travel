@@ -22,5 +22,7 @@ interface SessionServiceInterface
 
     public function findOneById(int $id): ?Session;
 
-    public function findAllByUser(User $user): array ;
+    public function findAllByUser(User $user): array;
+
+    public function findUnread(User $user): array;
 }

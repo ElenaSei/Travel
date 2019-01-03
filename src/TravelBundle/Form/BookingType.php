@@ -19,13 +19,15 @@ class BookingType extends AbstractType
                 'html5' => false))
             ->add('endDate', DateType::class, array(
                 'html5' => false));
-    }/**
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Booking'
+            'data_class' => 'TravelBundle\Entity\Booking'
         ));
     }
 

@@ -53,7 +53,7 @@ class Message
     /**
      * @var Session
      *
-     * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\Session", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="TravelBundle\Entity\Session", inversedBy="messages", cascade={"persist"})
      */
     private $session;
 

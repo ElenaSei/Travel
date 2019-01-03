@@ -1,0 +1,9 @@
+<div class="dropdown">
+    <button class="dropbtn">Notifications
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        <a href="{{ path('user_notifications') }}">Notifications({{ notificationsCount }})</a>
+        <a href="{{ path('user_mailbox') }}">Messages({{ msgCount }})</a>
+    </div>
+</div>

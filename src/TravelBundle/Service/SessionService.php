@@ -54,4 +54,9 @@ class SessionService implements SessionServiceInterface
     {
         return $this->sessionRepository->findAllByUser($user);
     }
+
+    public function findUnread(User $user): array
+    {
+        return $this->sessionRepository->findUnread($user);
+    }
 }

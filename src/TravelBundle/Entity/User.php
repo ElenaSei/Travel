@@ -116,6 +116,7 @@ class User implements UserInterface
         $this->sessions = new ArrayCollection();
     }
 
+
     /**
      * @return Search
      */

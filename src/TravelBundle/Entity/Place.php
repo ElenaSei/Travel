@@ -94,6 +94,7 @@ class Place
      */
     private $address;
 
+
     /**
      * Place constructor.
      */
@@ -102,6 +103,7 @@ class Place
         $this->bookings = new ArrayCollection();
         $this->capacity = 1;
     }
+
 
     /**
      * @return Address
