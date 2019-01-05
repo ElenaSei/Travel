@@ -47,6 +47,17 @@ class NotificationRepository extends \Doctrine\ORM\EntityRepository
 
             echo $e->getMessage();
         }
+    }
 
+    public function update(Notification $notification){
+        try{
+            $this->_em->merge($notification);
+            $this->_em->flush();
+
+            return true;
+        }catch (\Exception $e){
+
+            return false;
+        }
     }
 }

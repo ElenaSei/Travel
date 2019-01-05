@@ -103,6 +103,15 @@ class PlaceController extends Controller
         $bookings['past'] = $this->bookingService->findPastByPlace($place);
         $bookings['recent'] = $this->bookingService->findRecentByPlace($place);
 
+        if (isset($_GET['notificationId'])){
+            $notificationId = $_GET['notificationId'];
+            $notification = $this->notificationService->findOneById($notificationId);
+
+            $notification->setIsRead(true);
+
+            $this->notificationService->update($notification);
+        }
+
 
         return $this->render('front-end/place/details.html.twig', ['place' => $place, 'bookings' => $bookings]);
     }
@@ -223,6 +232,7 @@ class PlaceController extends Controller
             $notification = new Notification();
             $notification->setContent('Your place was booked!');
             $notification->setBooking($booking);
+            $notification->setIsRead(false);
 
             $this->notificationService->add($notification);
 

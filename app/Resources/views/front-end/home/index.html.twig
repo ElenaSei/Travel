@@ -33,17 +33,17 @@
                         {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
                     </div>
 
-                    {#<input type="text" name="daterange" />#}
-                    {#<input type="hidden" name="startDate" id="startDate">#}
-                    {#<input type="hidden" name="endDate" id="endDate">#}
+                        <input type="text" name="daterange" id="daterange" class="input100" value="01/01/2018 - 01/15/2018"/>
+                        <input type="hidden" name="search[startDate]" id="startDate">
+                        <input type="hidden" name="search[endDate]" id="endDate">
 
-                    <div class="wrap-input100 validate-input">
-                        {{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'input100'} }) }}
-                    </div>
+                    {#<div class="wrap-input100 validate-input">#}
+                        {#{{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'input100'} }) }}#}
+                    {#</div>#}
 
-                    <div class="wrap-input100 validate-input">
-                        {{ form_widget(form.endDate, { 'attr':{'id': 'endDate_form', 'class': 'input100'} }) }}
-                    </div>
+                    {#<div class="wrap-input100 validate-input">#}
+                        {#{{ form_widget(form.endDate, { 'attr':{'id': 'endDate_form', 'class': 'input100'} }) }}#}
+                    {#</div>#}
 
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
@@ -61,20 +61,17 @@
 
     <script>
 
-        {#$(function() {#}
-            {#$('input[name="daterange"]').daterangepicker({#}
-                {#opens: 'left'#}
-            {#}, function(startDate, endDate, label) {#}
-                {#console.log("A new date selection was made: " + startDate.format('YYYY-MM-DD') + ' to ' + endDate.format('YYYY-MM-DD'));#}
-            {#});#}
+        $('input[name="daterange"]').daterangepicker();
 
-        {#});#}
+        let date_range = $('#daterange').val();
+        let dates = date_range.split(" - ");
 
+        let startDate = dates[0];
+        let endDate = dates[1];
 
+        document.getElementById("startDate").setAttribute('value', startDate);
+        document.getElementById("endDate").setAttribute('value', endDate);
 
-         jQuery(document).ready(function() {
-             $('.js-datepicker').datepicker();
-         });
     </script>
 {% endblock %}
 

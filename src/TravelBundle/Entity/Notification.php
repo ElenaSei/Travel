@@ -71,9 +71,19 @@ class Notification
     /**
      * @return bool
      */
-    public function isRead(): bool
+    public function getIsRead(): bool
     {
         return $this->isRead;
+    }
+
+    /**
+     * @param bool $value
+     * @return Notification
+     */
+    public function setIsRead(bool $value)
+    {
+        $this->isRead = $value;
+        return $this;
     }
 
     /**

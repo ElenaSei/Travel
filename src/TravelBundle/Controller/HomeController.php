@@ -34,6 +34,8 @@ class HomeController extends Controller
         $form = $this->createForm(SearchType::class, $search);
         $form->handleRequest($request);
 
+//        dump($request);
+//        exit;
         if ($form->isSubmitted()) {
 
             $currentUser = $this->userService->findOneByUser($this->getUser());

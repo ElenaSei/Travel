@@ -1,0 +1,15 @@
+<div class="dropdown">
+    <button class="dropbtn">Notifications({{ notificationsCount }})
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+        {% if notifications is not empty %}
+            {% for notification in notifications %}
+            <p><a href="{{ path('place_details', {id: notification.booking.place.id, notificationId: notification.id}) }}">{{ notification.content }}</a></p>
+            {#<a href="{{ path('user_mailbox') }}">Messages({{ msgCount }})</a>#}
+            {% endfor %}
+        {% else %}
+            <p>You have no recent notifications</p>
+        {% endif %}
+    </div>
+</div>

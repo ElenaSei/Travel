@@ -16,7 +16,7 @@ use TravelBundle\Service\MessageServiceInterface;
 use TravelBundle\Service\NotificationServiceInterface;
 use TravelBundle\Service\SessionServiceInterface;
 
-class NotificationsController extends Controller
+class NavBarController extends Controller
 {
     private $notificationService;
     private $sessionService;
@@ -45,21 +45,21 @@ class NotificationsController extends Controller
         $notificationsUnread = $this->notificationService->findUnread($this->getUser());
         $notificationsCount = count($notificationsUnread);
 
-        $msgUnread = $this->messageService->findUnread($this->getUser());
-
-        $msgCount = count($msgUnread);
-
-        return $this->render('front-end/message/navbar.html.twig',
+        return $this->render('front-end/navbar/notifications.html.twig',
             ['notificationsCount' => $notificationsCount,
-             'msgCount' => $msgCount]);
+             'notifications' => $notificationsUnread]);
     }
 
     /**
-     * @Route("/notifications", name="user_notifications")
+     * @Route( name="navbar_messages")
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function notificationAction(){
+    public function messagesCountAction(){
+        $msgUnread = $this->messageService->findUnread($this->getUser());
+        $msgCount = count($msgUnread);
 
+        return $this->render('front-end/navbar/messages.html.twig',
+            ['msgCount' => $msgCount]);
     }
 
 }

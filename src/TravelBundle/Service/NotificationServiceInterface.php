@@ -13,7 +13,11 @@ use TravelBundle\Entity\User;
 
 interface NotificationServiceInterface
 {
-    public function add(Notification $notification);
+    public function add(Notification $notification): bool;
 
-    public function findUnread(User $user);
+    public function update(Notification $notification): bool;
+
+    public function findUnread(User $user): array;
+
+    public function findOneById(int $id): ?Notification;
 }
