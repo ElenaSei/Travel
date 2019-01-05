@@ -40,9 +40,15 @@
                         </div>
 
                         <a class="book" href="{{ path('user_view_message', {'id': message.session.id}) }}">
-                            <div class="btn-ctr">
-                                View
-                            </div>
+                            {% if message.session.isRead == false and message.recipient == app.user  %}
+                                <div class="btn-ctr">
+                                    Unread
+                                </div>
+                            {% else %}
+                                <div class="btn-ctr">
+                                    View
+                                </div>
+                                {% endif %}
                         </a>
                     </div>
                         <hr>

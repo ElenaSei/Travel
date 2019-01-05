@@ -26,7 +26,9 @@ class MessageController extends Controller
      * @param SessionServiceInterface $sessionService
      * @param UserServiceInterface $userService
      */
-    public function __construct(MessageServiceInterface $messageService, SessionServiceInterface $sessionService, UserServiceInterface $userService)
+    public function __construct(MessageServiceInterface $messageService,
+                                SessionServiceInterface $sessionService,
+                                UserServiceInterface $userService)
     {
         $this->messageService = $messageService;
         $this->sessionService = $sessionService;
@@ -132,8 +134,16 @@ class MessageController extends Controller
 
             return $this->redirectToRoute('user_mailbox');
         }
+        /**
+         * @var Message $message
+         */
+        $message = $this->messageService->findOnePerSession([$session], ['dateAdded' => 'DESC'])[0];
 
-        $session->setIsRead(true);
+//        dump($message);
+//        exit;
+        if ($message->getRecipient() === $this->getUser()){
+            $session->setIsRead(true);
+        }
 
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);

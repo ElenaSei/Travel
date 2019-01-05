@@ -46,12 +46,6 @@ class SearchType extends AbstractType
                     'required' => true
                 )
             )
-//            ->add('daterange', CollectionType::class, array(
-//                'startDate', DateType::class, array(
-//                    'widget' => 'single_text',
-//                ),
-//                'endDate', DateType::class
-//            ))
             ->add('startDate', DateType::class, array(
                 'widget' => 'single_text',
                     'attr' => ['class' => 'js-datepicker']
