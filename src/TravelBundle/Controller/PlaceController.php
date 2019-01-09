@@ -195,10 +195,8 @@ class PlaceController extends Controller
     public function allSelectedAction($searchId){
         $search = $this->searchService->findOneById($searchId);
 
-        $places = $this->placeService->findAllBySearch($search);
 
-//        dump($places);
-//        exit;
+        $places = $this->placeService->findAllBySearch($search);
 
        return $this->render('front-end/place/all.html.twig', ['places' => $places, 'search' => $search]);
     }

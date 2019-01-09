@@ -51,7 +51,6 @@ class MessageController extends Controller
         /**
          * @var User $recipient;
          */
-
         $recipient = $this->userService->findOneById($recipientId);
         $currentUser = $this->getUser();
 
@@ -89,7 +88,6 @@ class MessageController extends Controller
             $message->setSession($session);
 
             $this->messageService->save($message);
-
 
             $this->addFlash('info', 'Message send successfully!');
             return $this->redirectToRoute('user_mailbox');
