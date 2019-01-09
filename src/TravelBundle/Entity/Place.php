@@ -27,6 +27,8 @@ class Place
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     *
+     * @Assert\NotNull
      */
     private $name;
 
@@ -34,6 +36,8 @@ class Place
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     *
+     * @Assert\NotBlank
      */
     private $description;
 
@@ -41,6 +45,8 @@ class Place
      * @var int
      *
      * @ORM\Column(name="ownerId", type="integer")
+     *
+     * @Assert\NotNull
      */
     private $ownerId;
 
@@ -58,7 +64,7 @@ class Place
     private $summary;
 
     /**
-     * @Assert\NotBlank(message="Please, upload the photo.")
+     * @Assert\NotBlank(message="Please, upload a photo.")
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg" })
      *
      * @ORM\Column(name="photo", type="string", length=255)
@@ -77,6 +83,8 @@ class Place
      * @var integer
      *
      * @ORM\Column(name="price", type="float")
+     *
+     * @Assert\NotNull
      */
     private $price;
 
@@ -84,6 +92,8 @@ class Place
      * @var integer
      *
      * @ORM\Column(name="capacity", type="integer", nullable=false)
+     *
+     * @Assert\NotNull
      */
     private $capacity;
 
@@ -91,6 +101,8 @@ class Place
      * @var Address
      *
      * @ORM\OneToOne(targetEntity="TravelBundle\Entity\Address", inversedBy="place")
+     *
+     * @Assert\Valid
      */
     private $address;
 
@@ -101,7 +113,6 @@ class Place
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
-        $this->capacity = 1;
     }
 
 
@@ -125,7 +136,7 @@ class Place
     /**
      * @return int
      */
-    public function getCapacity(): int
+    public function getCapacity()
     {
         return $this->capacity;
     }
@@ -133,7 +144,7 @@ class Place
     /**
      * @param int $capacity
      */
-    public function setCapacity($capacity): void
+    public function setCapacity($capacity)
     {
         $this->capacity = $capacity;
     }

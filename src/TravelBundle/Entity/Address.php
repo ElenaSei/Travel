@@ -4,6 +4,7 @@ namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Address
@@ -26,6 +27,9 @@ class Address
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=255)
+     *
+     * @Assert\Country
+     * @Assert\NotBlank
      */
     private $country;
 
@@ -33,6 +37,8 @@ class Address
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $city;
 
@@ -40,6 +46,8 @@ class Address
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $street;
 

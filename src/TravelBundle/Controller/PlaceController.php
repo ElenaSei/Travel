@@ -197,6 +197,9 @@ class PlaceController extends Controller
 
         $places = $this->placeService->findAllBySearch($search);
 
+//        dump($places);
+//        exit;
+
        return $this->render('front-end/place/all.html.twig', ['places' => $places, 'search' => $search]);
     }
 
@@ -238,9 +241,16 @@ class PlaceController extends Controller
             $notification->setBooking($booking);
             $notification->setIsRead(false);
 
+            $place->setBookings($booking);
+
             $this->notificationService->add($notification);
 
             $this->bookingService->save($booking);
+
+            $this->placeService->update($place);
+
+//            dump($place);
+//            exit;
 
             $this->addFlash('info', 'Have a nice a trip!');
             return $this->redirectToRoute('homepage');

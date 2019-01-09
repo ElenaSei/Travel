@@ -4,6 +4,7 @@ namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Booking
@@ -27,6 +28,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="startDate", type="date", length=255, nullable=false)
+     *
+     * @Assert\NotBlank
      */
     private $startDate;
 
@@ -34,6 +37,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="date", length=255, nullable=false)
+     *
+     * @Assert\NotBlank
      */
     private $endDate;
 

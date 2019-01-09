@@ -23,8 +23,8 @@
                         {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
-                    <div class="wrap-input100 validate-input">
-                        <input class="input100" type="number" name="place[capacity]" placeholder="Capacity">
+                    <div class="wrap-input100 c-select">
+                        {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
                         {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 

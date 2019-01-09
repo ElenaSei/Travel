@@ -2,6 +2,7 @@
 
 namespace TravelBundle\Controller;
 
+use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,7 @@ class HomeController extends Controller
         $search = new Search();
         $form = $this->createForm(SearchType::class, $search);
         $form->handleRequest($request);
+
         
         if ($form->isSubmitted()) {
 
@@ -46,6 +48,14 @@ class HomeController extends Controller
                 $form = $this->createForm(SearchType::class, $search);
                 $form->handleRequest($request);
             }
+
+            $daterange = explode(' - ', $request->request->get('daterange'));
+
+            $startDate = DateTime::createFromFormat('Y-m-d', $daterange[0]);
+            $endDate = DateTime::createFromFormat('Y-m-d', $daterange[1]);
+
+            $search->setStartDate($startDate);
+            $search->setEndDate($endDate);
 
             $this->searchService->save($search);
 

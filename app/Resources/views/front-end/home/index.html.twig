@@ -33,9 +33,9 @@
                         {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
                     </div>
 
-                        <input type="text" name="daterange" id="daterange" class="input100" value="01/01/2018 - 01/15/2018"/>
-                        <input type="hidden" name="search[startDate]" id="startDate">
-                        <input type="hidden" name="search[endDate]" id="endDate">
+                        <input type="text" name="daterange" id="daterange" class="input100"/>
+                        {#<input type="hidden" name="search[startDate]" id="startDate">#}
+                        {#<input type="hidden" name="search[endDate]" id="endDate">#}
 
                     {#<div class="wrap-input100 validate-input">#}
                         {#{{ form_widget(form.startDate, { 'attr':{'id': 'startDate_form', 'class': 'input100'} }) }}#}
@@ -75,17 +75,17 @@
             // }
         });
 
-        let date_range = $('#daterange').val();
+       /* let date_range = $('#daterange').val();
         let dates = date_range.split(" - ");
 
         let startDate = dates[0];
-        let endDate = dates[1];
+        let endDate = dates[1];*/
 
         // let startDate = moment(dates[0], 'MM/DD/YYYY').format('YYYY-MM-DD');
         // let endDate = moment(dates[1], 'MM/DD/YYYY').format('YYYY-MM-DD');
 
-        document.getElementById("startDate").setAttribute('value', startDate);
-        document.getElementById("endDate").setAttribute('value', endDate);
+        // document.getElementById("startDate").setAttribute('value', startDate);
+        // document.getElementById("endDate").setAttribute('value', endDate);
 
     </script>
 {% endblock %}

@@ -25,7 +25,8 @@ class PlaceType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('photo', FileType::class, array(
                 'label' => 'Photo (png, jpeg)',
-                'data' => null))
+                'data' => null,
+                'required' => false))
             ->add('capacity', ChoiceType::class, array(
                 'choices' => array(
                     '1' => 1,
@@ -39,8 +40,7 @@ class PlaceType extends AbstractType
                     '9' => 9,
                     '10' => 10
                 ),
-                'placeholder' => 'Capacity',
-                'required' => true
+                'placeholder' => 'Capacity'
             )
             )
             ->add('price', MoneyType::class, array(

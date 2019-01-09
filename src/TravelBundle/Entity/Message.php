@@ -3,6 +3,7 @@
 namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Message
@@ -25,6 +26,8 @@ class Message
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     *
+     * @Assert\NotBlank
      */
     private $content;
 
@@ -32,6 +35,8 @@ class Message
      * @var \DateTime
      *
      * @ORM\Column(name="date_added", type="datetime")
+     *
+     * @Assert\NotBlank
      */
     private $dateAdded;
 

@@ -3,6 +3,7 @@
 namespace TravelBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Notification
@@ -25,6 +26,8 @@ class Notification
      * @var string
      *
      * @ORM\Column(name="content", type="text", nullable=false)
+     *
+     * @Assert\NotBlank
      */
     private $content;
 
