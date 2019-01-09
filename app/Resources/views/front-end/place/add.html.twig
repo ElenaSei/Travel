@@ -15,45 +15,45 @@
 
                     <div class="wrap-input100 validate-input">
                         <input class="input100" type="text" name="place[name]" placeholder="Name">
-                        <span class="focus-input100" data-placeholder="&#xe88a;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xe88a;"></span>#}
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter description">
                         <input class="input100" type="text" name="place[description]" placeholder="Description">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
                     <div class="wrap-input100 validate-input">
                         <input class="input100" type="number" name="place[capacity]" placeholder="Capacity">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter price per night">
                         {#<input class="input100" type="number" name="place[price]" placeholder="Price per night">#}
                         {{ form_widget(form.price, { 'attr':{'id': 'price_form', 'class': 'input100'} }) }}
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter country">
+                    <div class="wrap-input100 validate-input c-select" data-validate="Enter country">
                         {#<input class="input100" type="text" name="place[address][country]" placeholder="Country">#}
                         {{ form_widget(form.address.country, { 'attr':{'id': 'country_address_form', 'class': 'input100'} }) }}
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter city">
                         <input class="input100" type="text" name="place[address][city]" placeholder="City">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter street">
                         <input class="input100" type="text" name="place[address][street]" placeholder="Street">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Upload photo">
                         {#<input class="input100" type="text" name="place[photo]" placeholder="Upload photo">#}
                         {{ form_widget(form.photo, { 'attr':{'id': 'photo_form', 'class': 'input100'} }) }}
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        {#<span class="focus-input100" data-placeholder="&#xf191;"></span>#}
                     </div>
 
                     <div class="container-login100-form-btn">
@@ -62,11 +62,11 @@
                         </button>
                     </div>
 
-                    <div class="text-center p-t-90">
-                        <a class="txt1" href="{{ path('homepage') }}">
-                            Back
-                        </a>
-                    </div>
+                    {#<div class="text-center p-t-90">#}
+                        {#<a class="txt1" href="{{ path('homepage') }}">#}
+                            {#Back#}
+                        {#</a>#}
+                    {#</div>#}
                 </form>
             </div>
         </div>

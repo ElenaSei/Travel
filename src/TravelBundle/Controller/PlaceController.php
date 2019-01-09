@@ -131,16 +131,20 @@ class PlaceController extends Controller
         $form = $this->createForm(PlaceType::class, $place);
         $form->handleRequest($request);
 
-        $bookings = $this->bookingService->findRecentByPlace($place);
+        $bookings['past'] = $this->bookingService->findPastByPlace($place);
+        $bookings['recent'] = $this->bookingService->findRecentByPlace($place);
 
         if ($place === null){
             $this->addFlash('info','Undefined place');
+            return $this->render('front-end/place/details.html.twig', ['place' => $place, 'bookings' => $bookings]);
 
         }elseif ($place->getOwner() !== $this->getUser()){
             $this->addFlash('info', 'You are not owner of this place!');
+            return $this->render('front-end/place/details.html.twig', ['place' => $place, 'bookings' => $bookings]);
 
-        }elseif (!empty($bookings)){
-            $this->addFlash('info', 'This place has been booked. You cannot edit it.');
+        }elseif (!empty($bookings['recent'])){
+            $this->addFlash('info', 'This place is booked. You cannot edit it.');
+            return $this->render('front-end/place/details.html.twig', ['place' => $place, 'bookings' => $bookings]);
 
         }elseif ($form->isSubmitted()){
 
@@ -152,7 +156,7 @@ class PlaceController extends Controller
 
             $this->placeService->update($place);
 
-            return $this->redirectToRoute('homepage');
+            return $this->render('front-end/place/details.html.twig', ['place' => $place, 'bookings' => $bookings]);
         }
 
         return $this->render('front-end/place/edit.html.twig', ['place' => $place, 'form' => $form->createView()]);
@@ -243,7 +247,25 @@ class PlaceController extends Controller
 
         }
 
-        return $this->render('front-end/place/book.html.twig', ['place' => $place, 'search' => $search]);
+        $bookings = $this->bookingService->findRecentByPlace($place);
+
+        $count = 1;
+
+        $invalidDates = [];
+        /**
+         * @var  Booking $book
+         */
+        foreach ($bookings as $book){
+            $invalidDates[$count]['startDate'] = $book->getStartDate();
+            $invalidDates[$count]['endDate'] = $book->getEndDate();
+            $count++;
+        }
+
+        return $this->render('front-end/place/book.html.twig', [
+            'place' => $place,
+            'search' => $search,
+            'invalidDates' => $invalidDates
+        ]);
     }
 
 

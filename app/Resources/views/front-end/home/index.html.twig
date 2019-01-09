@@ -20,7 +20,7 @@
 						Find a Place
 					</span>
 
-                    <div class="wrap-input100 validate-input">
+                    <div class="wrap-input100 validate-input c-select">
                         {{ form_widget(form.country, { 'attr':{'id': 'country_form', 'class': 'input100'} }) }}
 
                     </div>
@@ -29,7 +29,7 @@
                         {{ form_widget(form.city, { 'attr':{'id': 'city_form', 'class': 'input100'} }) }}
                     </div>
 
-                    <div class="wrap-input100 validate-input">
+                    <div class="wrap-input100 validate-input c-select">
                         {{ form_widget(form.capacity, { 'attr':{'id': 'capacity_form', 'class': 'input100'} }) }}
                     </div>
 
@@ -61,13 +61,28 @@
 
     <script>
 
-        $('input[name="daterange"]').daterangepicker();
+        $('input[name="daterange"]').daterangepicker({
+            locale: {
+                format: 'YYYY-MM-DD'
+            },
+            minDate: new Date(),
+            maxDate: moment().endOf('year'),
+            endDate: '2019-01-20',
+            // isInvalidDate: function(date) {
+            //     if (date.format('YYYY-MM-DD') == '2019-01-12') {
+            //         return true;
+            //     }
+            // }
+        });
 
         let date_range = $('#daterange').val();
         let dates = date_range.split(" - ");
 
-        let startDate = moment(dates[0], 'MM/DD/YYYY').format('YYYY-MM-DD');
-        let endDate = moment(dates[1], 'MM/DD/YYYY').format('YYYY-MM-DD');
+        let startDate = dates[0];
+        let endDate = dates[1];
+
+        // let startDate = moment(dates[0], 'MM/DD/YYYY').format('YYYY-MM-DD');
+        // let endDate = moment(dates[1], 'MM/DD/YYYY').format('YYYY-MM-DD');
 
         document.getElementById("startDate").setAttribute('value', startDate);
         document.getElementById("endDate").setAttribute('value', endDate);

@@ -538,7 +538,7 @@ iframe {
   }
 }
 
-nav{
+nav > *{
     background: rgba(255, 255, 255, 0.6);
     text-align: center;
     padding: 0px;
@@ -1046,11 +1046,6 @@ img{ max-width:100%;}
     padding-top: 24px;
 }
 
-.dropdown {
-    float: left;
-    overflow: hidden;
-}
-
 .dropdown .dropbtn {
     line-height: 40px;
     font-size: 14px;
@@ -1075,7 +1070,7 @@ img{ max-width:100%;}
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 2;
 }
 
 .dropdown-content a {
@@ -1090,7 +1085,21 @@ img{ max-width:100%;}
 .dropdown-content a:hover {
     background-color: #ddd;
 }
-
+dropdown:hover .dropdown-content {
+    list-style-type: decimal;
+}
 .dropdown:hover .dropdown-content {
     display: flex;
+    flex-direction: column;
+}
+
+#place_address_country,#search_capacity,#search_country, #place_capacity{
+    border: none;
+    outline: none;
+}
+.c-select{
+    padding-left: 30px;
+}
+body > div.daterangepicker.dropdown-menu.ltr.show-calendar.opensright{
+    display: none;
 }
